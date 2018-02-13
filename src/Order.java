@@ -1,7 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Order {
 
     static boolean CheckOpportunity = true;
@@ -23,23 +19,22 @@ public class Order {
     {
 
     }
-// указание про сложность методов добавления, удаления, поиска и возврата размера актуально
-    // стоит использовать System.arrayCopy
-    public boolean addToOrder(Dish Food)
-    {
 
-        MassOfFood[index] = Food;
-
-        for (int i =0;i<MassOfFood.length;i++)
+    public static int deleteFoods(String NameFindFood) {
+        int count = 0;
+        for (int i = 0; i < MassOfFood.length; i++)
         {
-            if (MassOfFood[i] == null)
+            if (NameFindFood.equals(MassOfFood[i].NameOfFood))
             {
-                MassOfFood[i]=Food;
-                return true;
+                MassOfFood[i] = null;
+                count++;
+
+                System.arraycopy(MassOfFood, i, MassOfFood, i + 1, MassOfFood.length - i - 1);
             }
 
+
         }
-        return false;
+        return count;
     }
 
     public static boolean deleteOneFood(String NameFindFood)
@@ -58,22 +53,26 @@ public class Order {
 
     }
 
-    public static int deleteFoods(String NameFindFood)
-    {
-        int count=0;
-        for(int i=0;i<MassOfFood.length;i++)
-        {
-            if(NameFindFood == MassOfFood[i].NameOfFood)
-            {
-                MassOfFood[i]=null;
-                count+=1;
+    public static Dish[] getSortMassDishs() {
+        Dish[] w_dishmass = returnDishs();
+        double[] w_mass = new double[w_dishmass.length];
+        Dish[] ResMass = new Dish[w_dishmass.length];
 
-                System.arraycopy(MassOfFood,i,MassOfFood,i+1,MassOfFood.length-i-1);
-            }
-
-
+        for (int i = 0; i < w_dishmass.length; i++) {
+            w_mass[i] = w_dishmass[i].getCostOfOrder();
         }
-        return count;
+        w_mass = quickSort(w_mass, 0, w_mass.length - 1);
+        for (int i = 0; i < w_mass.length; i++)
+        {
+            for (int j = 0; j < ResMass.length; j++)
+            {
+                if (w_dishmass[j].getCostOfOrder() == w_mass[i]) {
+                    ResMass[i] = w_dishmass[j];
+                    w_dishmass[j] = null;
+                }
+            }
+        }
+        return ResMass;
     }
 
     public static Dish[] returnDishs()
@@ -90,16 +89,18 @@ public class Order {
 
     }
 
-    public double returnCostOfOrder()
+    public boolean addToOrder(Dish Food)
     {
-        double sum =0;
 
-        for (int i =0;i<MassOfFood.length;i++)
+        try {
+            MassOfFood[index] = Food;
+            index++;
+            return true;
+        } catch (Exception e)
         {
-            sum+=MassOfFood[i].costOfOrder();
+            return false;
         }
 
-        return sum;
     }
 
     public int numberDishsOfOrder(String nameOfDish)
@@ -118,7 +119,17 @@ public class Order {
         return niga;
     }
 
-    public static String[] getMassOfDish ()
+    public double returnCostOfOrder() {
+        double sum = 0;
+
+        for (int i = 0; i < MassOfFood.length; i++) {
+            sum += MassOfFood[i].getCostOfOrder();
+        }
+
+        return sum;
+    }
+
+    public String[] getMassOfDish()
     {
         int niga=MassOfFood.length;
         int R_a=0;
@@ -162,31 +173,6 @@ public class Order {
         }
 
         return ReturNames;
-    }
-
-    public static Dish[] getSortMassDishs()
-    {
-        Dish[] w_dishmass = returnDishs();
-        double[] w_mass = new double[w_dishmass.length];
-        Dish[] ResMass = new Dish[w_dishmass.length];
-
-        for (int i =0;i<w_dishmass.length;i++)
-        {
-            w_mass[i]=w_dishmass[i].costOfOrder();
-        }
-        w_mass=quickSort(w_mass,0,w_mass.length-1);
-        for (int i=0;i<w_mass.length;i++)
-        {
-            for(int j =0;j<ResMass.length;j++)
-            {
-                if(w_dishmass[j].costOfOrder()==w_mass[i])
-                {
-                    ResMass[i]=w_dishmass[j];
-                    w_dishmass[j] = null;
-                }
-            }
-        }
-        return ResMass;
     }
 
     private static double[] quickSort(double[] mass,int b,int e) {
