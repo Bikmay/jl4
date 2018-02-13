@@ -34,7 +34,11 @@ public class Tests {
     {
         OrderManager orderManager = new OrderManager(7);
 
-        
+
+    }
+
+    private void hh6() {
+
     }
 
 }
