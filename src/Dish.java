@@ -1,49 +1,45 @@
 public class Dish {
 
 
-    public String NameOfFood;
-    private String DescriptionsOrders;
-    private double cost = 0;
+    private static final int DEFAULT_COST = 0;
+    private String name;
+    private String description;
+    private double cost;
 
 
-    public Dish(String InputNameOfFood, String InputDescriptionsOrders)
-    {
-        NameOfFood = InputNameOfFood;
-        DescriptionsOrders = InputDescriptionsOrders;
-        cost=0;
+    public Dish(String name, String description) {
+        this(name, description, DEFAULT_COST);
     }
 
-    public double getCostOfOrder()
-    {
+    public Dish(String name, String description, double cost) {
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+    }
+
+    public double getCost() {
         return cost;
     }
 
-    public void setNewCost(double new_cost)
-    {
-        this.cost = new_cost;
-
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
-    public String getNameOfFood()
-    {
-        return NameOfFood;
+    public String getName() {
+        return name;
     }
 
-    public void setNameFood(String new_name)
-    {
-        this.NameOfFood = new_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription()
-    {
-        return DescriptionsOrders;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNameDescription(String new_name)
-    {
-        DescriptionsOrders=new_name;
+    public void setDescription(String name) {
+        description = name;
     }
-
 
 
 }

@@ -30,15 +30,5 @@ public class Tests {
         return true;
     }
 
-    private static boolean testCheckClassOrderManager1()//
-    {
-        OrderManager orderManager = new OrderManager(7);
-
-
-    }
-
-    private void hh6() {
-
-    }
 
 }
