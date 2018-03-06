@@ -1,3 +1,5 @@
+package barBossHouse;
+
 public class Tests {
 
     //todo чот так себе тесты)
@@ -17,7 +19,7 @@ public class Tests {
         order.addToOrder(new Dish("Пюре", "Горячее"));
         order.addToOrder(new Dish("Картошечка", "Быстрее"));
 
-        String[] testMass = order.getMassOfDish();
+        String[] testMass = order.getNamesBookedDishs();
 
         for (int i = 0; i < testMass.length; i++) {
             for (int j = 0; j < testMass.length; j++) {

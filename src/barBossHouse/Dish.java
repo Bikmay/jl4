@@ -1,3 +1,5 @@
+package barBossHouse;
+
 public class Dish {
 
 

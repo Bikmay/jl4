@@ -1,4 +1,4 @@
-import java.lang.reflect.Array;
+package barBossHouse;
 
 public class Order {
 
@@ -124,7 +124,7 @@ public class Order {
     //todo используешь приватный сайз для добавления. Если он меньше длины массива, то просто добавляешь
     //todo если меньше, то увеличиваешь массив вдвое, копируешь и добавляешь
     //do
-    public boolean addToOrder(Dish dish,int index) {
+    public boolean addToOrder(Dish dish, int index) {
 
         if(massOfFood.length<=index)
         {
@@ -134,7 +134,9 @@ public class Order {
         else
         {
             Dish[] newMass= new Dish[massOfFood.length*2];
-            System.arraycopy(massOfFood,0,newMass,0,massOfFood.length+1);
+            System.arraycopy(massOfFood,0,newMass,0,massOfFood.length);
+            newMass[massOfFood.length]=dish;
+            massOfFood=newMass;
             return true;
         }
 
@@ -186,7 +188,7 @@ public class Order {
     }
 
     //todo А ты уверен, что реализовал здесь все методы по заданию?
-    //один забыл
+    //один забыл, но сделал
   public int getCountDishs()
   {
       return massOfFood.length;
