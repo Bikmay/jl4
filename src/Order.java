@@ -65,6 +65,7 @@ public class Order {
             massOfFood[massOfFood.length-1]=null;
 
         }
+        return count;
     }
 
 
@@ -88,7 +89,7 @@ public class Order {
     //do
     public Dish[] sotringDishsAtCosts() {
 
-        Dish[] dishMass = returnDishs();//Входящий
+        Dish[] dishMass = getMassOfFood();//Входящий
         double[] w_mass = new double[dishMass.length];//Массив цен
         Dish[] ResMass = new Dish[dishMass.length];//Результирующий массив
 
@@ -128,7 +129,7 @@ public class Order {
         if(massOfFood.length<=index)
         {
             massOfFood[index]=dish;
-            return true
+            return true;
         }
         else
         {
@@ -136,7 +137,6 @@ public class Order {
             System.arraycopy(massOfFood,0,newMass,0,massOfFood.length+1);
             return true;
         }
-        return false;
 
     }
 
@@ -163,49 +163,32 @@ public class Order {
     }
 
     //todo именование дерьмо
-    public double returnCostOfOrder() {
-        double sum = 0;
-        for (int i = 0; i < MassOfFood.length; i++) {
-            sum += MassOfFood[i].getCost();
+    //do
+    public double orderCost() {
+        double cost = 0;
+        for (int i = 0; i < massOfFood.length; i++) {
+            cost += massOfFood[i].getCost();
         }
-        return sum;
+        return cost;
     }
 
     //todo именование дерьмо
     //todo что блять здесь происходит >_<
-    public String[] getMassOfDish() {
-        int niga = MassOfFood.length;
-        int R_a = 0;
-        for (int i = 0; i < MassOfFood.length; i++) {
-            for (int j = 0; j < MassOfFood.length; j++) {
-                if (MassOfFood[i].getName() == MassOfFood[j].getName()) {
-                    if (R_a > 0) {
-                        niga -= 1;
-                    }
-                    R_a++;
-                }
-            }
+    //reform code
+    //do
+    public String[] getNamesBookedDishs() {
+        String[] names = new String[massOfFood.length];
+
+        for (int i = 0; i < massOfFood.length; i++) {
+            names[i] = massOfFood[i].getName();
         }
-        //todo неплохим выходом из сиутации будет следующий подход
-        //todo создаешь стринговый массив размера size
-        //todo при совпадении имени добавляешь в массив имя блюда
-        //todo тримишь массив и возвращаешь его
-        String[] ReturNames = new String[niga];
-        boolean Checker = true;
-        int k = 0;
-        for (int i = 0; i < MassOfFood.length; i++) {
-            for (int j = 0; j < ReturNames.length; j++) {
-                if (MassOfFood[i].getName() == MassOfFood[j].getName()) {
-                    Checker = false;
-                }
-            }
-            if (Checker == true) { //todo сравнивать логические переменные на булевские литералы? ВАТ?!
-                ReturNames[k] = MassOfFood[i].getName();
-                k++;
-            }
-        }
-        return ReturNames;
+        return names;
     }
 
     //todo А ты уверен, что реализовал здесь все методы по заданию?
+    //один забыл
+  public int getCountDishs()
+  {
+      return massOfFood.length;
+  }
 }

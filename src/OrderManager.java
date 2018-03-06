@@ -1,10 +1,11 @@
 public class OrderManager {
     //todo ИМЕНОВАНИЕ МАТЬ ЕГО СУКА БЛЯТЬ ГРОБ ГРОБ КЛАДБИЩЕ ПИДР
     //todo зачем static?
-    static Order[] OrdersOfTable;
+   Order[] OrdersOfTable;
 
     //todo такие же приемы с конструкторами как и в остальных классах
     //todo и их вроде не хватает)
+    //Чекни задание
     OrderManager(int InputNumberOfTable) {
         Order[] OrdersOfTable = new Order[InputNumberOfTable];
 
@@ -12,15 +13,17 @@ public class OrderManager {
     }
 
 
-    public static void addOrderToTable(int NumberOfTable, Order AddlyOrder) {
+    public void addOrder(int NumberOfTable, Order AddlyOrder) {
         OrdersOfTable[NumberOfTable - 1] = AddlyOrder;
     }
 
-    public static void addDishToTableOrder(int NumberOfTable, Dish AddlyDish) {
+
+    //TODO переписать
+    public void addDishToTableOrder(int NumberOfTable, Dish AddlyDish) {
         OrdersOfTable[NumberOfTable - 1].addToOrder(AddlyDish);
     }
 
-    public static void clearTableOrder(int NumberOfTable) {
+    public void clearTableOrder(int NumberOfTable) {
         OrdersOfTable[NumberOfTable - 1] = null;
     }
 
