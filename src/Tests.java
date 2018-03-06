@@ -1,6 +1,6 @@
 public class Tests {
 
-
+    //todo чот так себе тесты)
     public static void main(String[] args) {
 
         Order order = new Order();
