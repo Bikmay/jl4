@@ -10,7 +10,7 @@ public class OrderManager {
     //todo такие же приемы с конструкторами как и в остальных классах
     //todo и их вроде не хватает)
     //Чекни задание
-    OrderManager(int InputNumberOfTable) {
+    public OrderManager(int InputNumberOfTable) {
         Order[] OrdersOfTable = new Order[InputNumberOfTable];
 
         int NumberOfTable = InputNumberOfTable;
@@ -61,14 +61,6 @@ public class OrderManager {
     //do
     public Order[] getAllOrders() {
 
-        for (int j = 0; j < ordersOfTable.length; j++) {
-            if (ordersOfTable[j] == null) {
-                ordersOfTable[j] = ordersOfTable[j + 1];
-                j++;
-            }
-        }
-
-//todo new array
         return ordersOfTable;
     }
 

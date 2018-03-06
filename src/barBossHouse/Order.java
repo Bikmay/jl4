@@ -173,6 +173,6 @@ public class Order {
     //todo А ты уверен, что реализовал здесь все методы по заданию?
     //один забыл, но сделал
     public int getCountDishes() {
-        return dishes.length;
+        return size;
     }
 }
