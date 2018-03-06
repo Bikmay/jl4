@@ -13,11 +13,11 @@ public class Tests {
 
     private static boolean testCheckClassOrder1(Order order)//Тестим возвращение массива блюд без дубликатов
     {
-        order.addToOrder(new Dish("Картошечка", "Быстрее"));
-        order.addToOrder(new Dish("Грибы", "медленее"));
-        order.addToOrder(new Dish("Борщец", "Быстрее"));
-        order.addToOrder(new Dish("Пюре", "Горячее"));
-        order.addToOrder(new Dish("Картошечка", "Быстрее"));
+        order.addDish(new Dish("Картошечка", "Быстрее"));
+        order.addDish(new Dish("Грибы", "медленее"));
+        order.addDish(new Dish("Борщец", "Быстрее"));
+        order.addDish(new Dish("Пюре", "Горячее"));
+        order.addDish(new Dish("Картошечка", "Быстрее"));
 
         String[] testMass = order.getNamesBookedDishs();
 
