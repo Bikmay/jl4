@@ -1,21 +1,23 @@
+import java.lang.reflect.Array;
+
 public class Order {
 
     //todo пересмотри свою политику именования в этом и других классах. Dish можешь не трогать, там нормально)
     private int size;
-    private boolean CheckOpportunity = true;
-    private Dish[] MassOfFood;
+    private boolean checkOpportunity = true;
+    private Dish[] massOfFood;
     private int index = 0;
 
     //todo константы и конструкторы по аналогии с Dish
     Order() {
-        MassOfFood = new Dish[16];
+        massOfFood = new Dish[16];
     }
 
-    Order(int NumberOfElements) {
-        MassOfFood = new Dish[NumberOfElements];
+    Order(int numberOfElements) {
+        massOfFood = new Dish[numberOfElements];
     }
 
-    Order(Dish[] MassOfFood) {
+    Order(Dish[] massOfFood) {
 
     }
 
@@ -42,27 +44,39 @@ public class Order {
     }
 
     //todo именование дерьмо
-
-    public int deleteFoods(String NameFindFood) {
+    //do
+    public int deleteDishs(String[] deleteDishs) {
         int count = 0;
-        for (int i = 0; i < MassOfFood.length; i++) {
-            if (NameFindFood.equals(MassOfFood[i].getName())) {
-                MassOfFood[i] = null;
-                count++;
-                //todo и ты на каждой операции будешь двигать массив? не надо так)
-                //todo проще сначала все удалить, а потом перенести на пустые элементы
-                System.arraycopy(MassOfFood, i, MassOfFood, i + 1, MassOfFood.length - i - 1);
+        int[] indexMass= new int[deleteDishs.length];
+        for (int i = 0; i <deleteDishs.length ; i++) {
+
+
+            for (int j = 0; j < massOfFood.length; j++) {
+                if (deleteDishs[i].equals(massOfFood[j].getName())) {
+                    massOfFood[j] = null;
+                    indexMass[count]=j;
+                    count++;
+                }
             }
         }
-        return count;
+
+        for (int i = 0; i <count ; i++) {
+            massOfFood[indexMass[i]]=massOfFood[massOfFood.length-1];
+            massOfFood[massOfFood.length-1]=null;
+
+        }
     }
+
+
 
     //todo именование дерьмо
     //todo но метод оставляет за собой дырку в массиве, это нехорошо)
-    public boolean deleteOneFood(String NameFindFood) {
-        for (int i = 0; i < MassOfFood.length; i++) {
-            if (NameFindFood == MassOfFood[i].getName()) {
-                MassOfFood[i] = null;
+    //do
+    public boolean deleteOneDish(String deleteDish) {
+        for (int i = 0; i < massOfFood.length; i++) {
+            if (deleteDish == massOfFood[i].getName()) {
+                massOfFood[i] = null;
+                System.arraycopy(massOfFood,i,massOfFood,i+1,massOfFood.length-i);
                 return true;
             }
         }
@@ -71,26 +85,35 @@ public class Order {
 
     //todo именование дерьмо
     //todo именование переменных тоже дерьмо
-    public Dish[] getSortMassDishs() {
-        Dish[] dishmass = returnDishs();
-        double[] w_mass = new double[dishmass.length];
-        Dish[] ResMass = new Dish[dishmass.length];
+    //do
+    public Dish[] sotringDishsAtCosts() {
+
+        Dish[] dishMass = returnDishs();//Входящий
+        double[] w_mass = new double[dishMass.length];//Массив цен
+        Dish[] ResMass = new Dish[dishMass.length];//Результирующий массив
+
         //todo зачем ты это делаешь??
-        for (int i = 0; i < dishmass.length; i++) {
-            w_mass[i] = dishmass[i].getCost();
+        // копирую цены,чтобы потом по ним сортировать
+
+        for (int i = 0; i < dishMass.length; i++) {
+            w_mass[i] = dishMass[i].getCost();
         }
+
         w_mass = quickSort(w_mass, 0, w_mass.length - 1);
+
         //todo и здесь... ??
-        for (int i = 0; i < w_mass.length; i++) {
+        //Вписываю в результирующий массив
+        for (int i = w_mass.length; i >-1; i--) {
             for (int j = 0; j < ResMass.length; j++) {
-                if (dishmass[j].getCost() == w_mass[i]) {
-                    ResMass[i] = dishmass[j];
-                    dishmass[j] = null;
+                if (dishMass[j].getCost() == w_mass[i]) {
+                    ResMass[i] = dishMass[j];
+                    dishMass[j] = null;
                 }
             }
         }
         //todo тебе достаточно использовать просто метод быстрой сортировки,
         //todo зачем ты занимаешься созданием бесполезных массиввов?
+        //Сортировка идёт по цене
         return ResMass;
     }
 
@@ -99,38 +122,44 @@ public class Order {
     //todo не нужно отлавливать на данном этапе исключения
     //todo используешь приватный сайз для добавления. Если он меньше длины массива, то просто добавляешь
     //todo если меньше, то увеличиваешь массив вдвое, копируешь и добавляешь
-    public boolean addToOrder(Dish Food) {
-        try {
-            MassOfFood[index] = Food;
-            index++;
-            return true;
-        } catch (Exception e) {
-            return false;
+    //do
+    public boolean addToOrder(Dish dish,int index) {
+
+        if(massOfFood.length<=index)
+        {
+            massOfFood[index]=dish;
+            return true
         }
+        else
+        {
+            Dish[] newMass= new Dish[massOfFood.length*2];
+            System.arraycopy(massOfFood,0,newMass,0,massOfFood.length+1);
+            return true;
+        }
+        return false;
+
     }
 
     //todo именование дерьмо
     //todo вернул бы копию массива от 0 до size
-    public Dish[] returnDishs() {
-        Dish[] ResultMass = new Dish[MassOfFood.length];
-        for (int i = 0; i < MassOfFood.length; i++) {
-            if (MassOfFood == null) break;
-            ResultMass[i] = MassOfFood[i];
-        }
-        return ResultMass;
+    //do
+    public Dish[] getMassOfFood() {
+        Dish[] copyMass= new Dish[massOfFood.length];
+        System.arraycopy(massOfFood,0,copyMass,0,massOfFood.length);
+        return copyMass;
     }
 
 
     //todo именование дерьмо
-    public int numberDishsOfOrder(String nameOfDish) {
-        Dish[] MassOfDish = returnDishs(); //todo зачем???
-        int niga = 0;
-        for (int i = 0; i < MassOfDish.length; i++) {
-            if (nameOfDish == MassOfDish[i].getName()) { //todo сравнение строк по == ?!!
-                niga++;
+    //do
+    public int getCountDish(String nameOfDish) {
+        int count = 0;
+        for (int i = 0; i < massOfFood.length; i++) {
+            if (nameOfDish.equals(massOfFood[i].getName())) {
+              count++;
             }
         }
-        return niga;
+        return count;
     }
 
     //todo именование дерьмо
