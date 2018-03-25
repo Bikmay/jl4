@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 public class OrderManager {
     //todo ИМЕНОВАНИЕ МАТЬ ЕГО СУКА БЛЯТЬ ГРОБ ГРОБ КЛАДБИЩЕ ПИДР
     //todo зачем static?
-    Order[] ordersOfTable;
+    private Order[] ordersOfTable;
 
     //todo такие же приемы с конструкторами как и в остальных классах
     //todo и их вроде не хватает)
@@ -13,7 +13,7 @@ public class OrderManager {
     public OrderManager(int InputNumberOfTable) {
         Order[] OrdersOfTable = new Order[InputNumberOfTable];
 
-        int NumberOfTable = InputNumberOfTable;
+        int numberOfTable = InputNumberOfTable;
     }
 
 
