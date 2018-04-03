@@ -5,24 +5,24 @@ import java.util.function.Predicate;
 public class OrderManager {
     //todo ИМЕНОВАНИЕ МАТЬ ЕГО СУКА БЛЯТЬ ГРОБ ГРОБ КЛАДБИЩЕ ПИДР
     //todo зачем static?
-    private Order[] ordersOfTable;
+    private TableOrder[] ordersOfTable;
 
     //todo такие же приемы с конструкторами как и в остальных классах
     //todo и их вроде не хватает)
     //Чекни задание
     public OrderManager(int InputNumberOfTable) {
-        Order[] OrdersOfTable = new Order[InputNumberOfTable];
+        TableOrder[] OrdersOfTable = new TableOrder[InputNumberOfTable];
 
         int numberOfTable = InputNumberOfTable;
     }
 
 
-    public void addOrder(int numberTable, Order addlyOrder) {
+    public void addOrder(int numberTable, TableOrder addlyOrder) {
         if (ordersOfTable.length <= numberTable) {
             ordersOfTable[numberTable] = addlyOrder;
 
         } else {
-//            Order[] newMass = new Order[ordersOfTable.length * 2];
+//            TableOrder[] newMass = new TableOrder[ordersOfTable.length * 2];
 //            System.arraycopy(ordersOfTable, 0, newMass, 0, ordersOfTable.length);
 //            newMass[ordersOfTable.length] = addlyOrder;
 //            ordersOfTable = newMass;
@@ -31,8 +31,8 @@ public class OrderManager {
     }
 
 
-    public void addDishToTableOrder(int NumberOfTable, int index, Dish dish) {
-        ordersOfTable[NumberOfTable - 1].addDish(dish);
+    public void addDishToTableOrder(int NumberOfTable, int index, MenuItem menuItem) {
+        ordersOfTable[NumberOfTable - 1].addDish(menuItem);
     }
 
     public void clearTableOrder(int NumberOfTable) {
@@ -43,30 +43,30 @@ public class OrderManager {
 
     //todo ты перепишешь этот метод на использование предиката, как только доделаешь всё до конца)
     //do
-    public Order[] findFreeTables() {
+    public TableOrder[] findFreeTables() {
 
-        Predicate<Order> predicate = (e) -> e==null;
+        Predicate<TableOrder> predicate = (e) -> e==null;
 
         return getTables(predicate);
     }
 
-    public Order[] findBusyTables() {
+    public TableOrder[] findBusyTables() {
 
-        Predicate<Order> predicate = (e) -> e != null;
+        Predicate<TableOrder> predicate = (e) -> e != null;
 
         return getTables(predicate);
     }
 
     //todo так может здесь надо только ордера вернуть, а не массив ордеров с дырками?)
     //do
-    public Order[] getAllOrders() {
+    public TableOrder[] getAllOrders() {
 
         return ordersOfTable;
     }
 
-    private Order[] getTables(Predicate<Order> predicate) {
+    private TableOrder[] getTables(Predicate<TableOrder> predicate) {
         int i = 0;
-        Order[] orders = new Order[ordersOfTable.length];
+        TableOrder[] orders = new TableOrder[ordersOfTable.length];
         for (int j = 0; j < ordersOfTable.length; j++) {
             if (predicate.test(ordersOfTable[j])) {
                 orders[i] = ordersOfTable[j];
@@ -80,7 +80,7 @@ public class OrderManager {
 
     public double getCostAllOrder() {
         double allCost = 0;
-        for (Order item : ordersOfTable) {
+        for (TableOrder item : ordersOfTable) {
             allCost += item.totalCost();
         }
         return allCost;

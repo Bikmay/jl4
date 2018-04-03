@@ -1,47 +1,37 @@
 package barBossHouse;
 
-public class Dish {
+public class Dish extends MenuItem{
 
-
-    private static final int DEFAULT_COST = 0;
-    private String name;
-    private String description;
-    private double cost;
-
-
-    public Dish(String name, String description) {
-        this(name, description, DEFAULT_COST);
+    protected Dish(String name, String description) {
+        super(name, description,0);
     }
 
-    public Dish(String name, String description, double cost) {
-        this.name = name;
-        this.description = description;
-        this.cost = cost;
+    protected Dish(String name, String description,int cost) {
+        super(name, description,cost);
     }
 
-    public double getCost() {
-        return cost;
+    @Override
+    public String toString() {
+        return super.toString()+" "+ super.getDescription();
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
-    public String getName() {
-        return name;
+    //todo переделать
+    @Override
+    public boolean equals(Object obj) {
+        MenuItem menuItem= this;
+
+        if (obj.getClass()==this.getClass() && menuItem.equals(obj))
+        {
+            return true;
+
+        }
+        return false;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String name) {
-        description = name;
-    }
-
-
 }
+
+

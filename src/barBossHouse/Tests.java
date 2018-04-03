@@ -5,19 +5,19 @@ public class Tests {
     //todo чот так себе тесты)
     public static void main(String[] args) {
 
-        Order order = new Order();
+        TableOrder order = new TableOrder();
 
         System.out.println(testCheckClassOrder1(order));
 
     }
 
-    private static boolean testCheckClassOrder1(Order order)//Тестим возвращение массива блюд без дубликатов
+    private static boolean testCheckClassOrder1(TableOrder order)//Тестим возвращение массива блюд без дубликатов
     {
-        order.addDish(new Dish("Картошечка", "Быстрее"));
-        order.addDish(new Dish("Грибы", "медленее"));
-        order.addDish(new Dish("Борщец", "Быстрее"));
-        order.addDish(new Dish("Пюре", "Горячее"));
-        order.addDish(new Dish("Картошечка", "Быстрее"));
+        order.addDish(new MenuItem("Картошечка", "Быстрее"));
+        order.addDish(new MenuItem("Грибы", "медленее"));
+        order.addDish(new MenuItem("Борщец", "Быстрее"));
+        order.addDish(new MenuItem("Пюре", "Горячее"));
+        order.addDish(new MenuItem("Картошечка", "Быстрее"));
 
         String[] testMass = order.getNamesBookedDishs();
 
