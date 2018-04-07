@@ -1,6 +1,6 @@
 package barBossHouse;
 
-public class TableOrder {
+public class TableOrder  implements Order{
 
     //todo пересмотри свою политику именования в этом и других классах.
     //todo MenuItem можешь не трогать, там нормально)
@@ -10,7 +10,7 @@ public class TableOrder {
 
     private final int DEFAULT_COUNT_DISHES=16;
 
-    //todo константы и конструкторы по аналогии с MenuItem
+
     public TableOrder(Customer customer) {
         new TableOrder(DEFAULT_COUNT_DISHES,customer);
     }
@@ -47,8 +47,6 @@ public class TableOrder {
         return mass;
     }
 
-    //todo именование дерьмо
-    //do1
     public int deleteDishes(String[] deleteDishes) {
         int count = 0;
         int[] indexMass = new int[deleteDishes.length];
@@ -70,10 +68,9 @@ public class TableOrder {
     }
 
 
-    //todo именование дерьмо
-    //todo но метод оставляет за собой дырку в массиве, это нехорошо)
+
     //do
-    public boolean deleteDish(String deleteDish) {
+    public boolean remove(String deleteDish) {
         for (int i = 0; i < menuItems.length; i++) {
             if (deleteDish.equals(menuItems[i].getName())) {
                 menuItems[i] = null;
@@ -86,7 +83,7 @@ public class TableOrder {
         return false;
     }
 
-    public boolean deleteMenuItem(MenuItem menuItem)
+    public boolean remove(MenuItem menuItem)
     {
         for (int i = 0; i <size ; i++) {
             if(menuItems[i].equals(menuItem))
@@ -99,7 +96,22 @@ public class TableOrder {
         return false;
     }
 
-    public int deleteMenuItems(MenuItem menuItem)
+    public int removeAll(String itemName)
+    {
+        int count=0;
+
+        for (int i = 0; i <size ; i++) {
+            if(menuItems[i].getName().equals(itemName))
+            {
+                System.arraycopy(menuItems,i,menuItems,i+1,size-i);
+                count++;
+            }
+
+        }
+        return count;
+
+    }
+    public int removeAll(MenuItem menuItem)
     {
          int count=0;
 
@@ -115,10 +127,9 @@ public class TableOrder {
 
     }
 
-    //todo именование дерьмо
-    //todo именование переменных тоже дерьмо
+
     //do
-    public MenuItem[] getSortedDishes() {
+    public MenuItem[] sortedItemsByCostDesc() {
 
 
 
@@ -134,10 +145,7 @@ public class TableOrder {
     }
 
 
-    //todo именование дерьмо
-    //todo не нужно отлавливать на данном этапе исключения
-    //todo используешь приватный сайз для добавления. Если он меньше длины массива, то просто добавляешь
-    //todo если меньше, то увеличиваешь массив вдвое, копируешь и добавляешь
+
     //do
     public boolean addDish(MenuItem menuItem) {
 
@@ -157,19 +165,18 @@ public class TableOrder {
 
     }
 
-    //todo именование дерьмо
-    //todo вернул бы копию массива от 0 до size
+
     //do
-    public MenuItem[] getMenuItems() {
+    public MenuItem[] getItems() {
         MenuItem[] copyMass = new MenuItem[menuItems.length];
         System.arraycopy(menuItems, 0, copyMass, 0, menuItems.length);
         return copyMass;
     }
 
 
-    //todo именование дерьмо
+
     //do
-    public int getDishesCount(String nameOfDish) {
+    public int  getItemQuantity(String nameOfDish) {
         int count = 0;
         for (int i = 0; i < menuItems.length; i++) {
             if (nameOfDish.equals(menuItems[i].getName())) {
@@ -179,9 +186,20 @@ public class TableOrder {
         return count;
     }
 
+    public int  getItemQuantity(MenuItem item)
+    {
+        int count = 0;
+        for (int i = 0; i < menuItems.length; i++) {
+            if (item.equals(menuItems[i])) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     //todo именование дерьмо
     //do
-    public double totalCost() {
+    public double costTotal() {
         double cost = 0;
         for (int i = 0; i < menuItems.length; i++) {
             cost += menuItems[i].getCost();
@@ -189,11 +207,10 @@ public class TableOrder {
         return cost;
     }
 
-    //todo именование дерьмо
-    //todo что блять здесь происходит >_<
+
     //reform code
     //do
-    public String[] getNamesBookedDishs() {
+    public String[] getItemsNames() {
         String[] names = new String[menuItems.length];
 
         for (int i = 0; i < menuItems.length; i++) {
@@ -202,9 +219,11 @@ public class TableOrder {
         return names;
     }
 
-    //todo А ты уверен, что реализовал здесь все методы по заданию?
+
+
+
     //один забыл, но сделал
-    public int getCountDishes() {
+    public int getQuantity() {
         return size;
     }
 
