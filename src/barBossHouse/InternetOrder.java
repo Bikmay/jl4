@@ -95,7 +95,12 @@ public class InternetOrder  implements Order{
     public MenuItem[] sortedItemsByCostDesc() {
         MenuItem[] arr= new MenuItem[head.size];
 
-        head=ListNode.sort(head,)
+        head=ListNode.sort(head,0,-1);
+
+        for (int i = 0; i <head.size ; i++) {
+            arr[i]=head.get(i);
+        }
+        return arr;
     }
 
     public int getQuantity() {
