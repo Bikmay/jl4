@@ -1,19 +1,10 @@
 package barBossHouse;
 
-public class Queue {
+public interface Queue {
 
-    int count=0;
-    Order value;
-    Queue next;
-    Queue prev;
+    boolean add(Object obj);
 
+    Order getValueOrder(int index);
+    boolean add(Order order);
 
-    public boolean add(Order order)
-    {
-        next=new Queue();
-        next.value=order;
-        next.prev=this;
-        count++;
-        return true;
-    }
 }

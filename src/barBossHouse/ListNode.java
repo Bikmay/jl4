@@ -1,11 +1,12 @@
 package barBossHouse;
 
-public class ListNode {
+public class ListNode implements  Queue{
 
     private int index;
     private ListNode head;
     private ListNode next;
     private MenuItem value;
+    private Order valueOrder;
 
     public int size=0;
 
@@ -73,6 +74,15 @@ public class ListNode {
     }
 
 
+    public boolean add(Order order)
+    {
+        next=new ListNode();
+        next.valueOrder=order;
+
+        size++;
+        return true;
+    }
+
 
 
    /* public boolean deleteItem()
@@ -130,6 +140,15 @@ public class ListNode {
             item=item.next;
         }
         return item.value;
+    }
+
+    public Order getValueOrder(int index)
+    {
+        ListNode item=head;
+        for (int i = 0; i <index ; i++) {
+            item=item.next;
+        }
+        return item.valueOrder;
     }
 
     @Override
