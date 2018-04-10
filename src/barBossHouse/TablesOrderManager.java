@@ -107,8 +107,55 @@ public class TablesOrderManager {
     }
 
 
+    public Order getOrder(int index)
+    {
+        return ordersOfTable[index];
+    }
+
     public int getCountOrders()
     {
         return findBusyTables().length;
     }
+
+    public int removeAll(TableOrder order)
+    {
+        int count=0;
+        for (int i = 0; i <ordersOfTable.length ; i++) {
+
+            if (ordersOfTable[i].equals(order))
+            {
+                ordersOfTable[i]=null;
+                count++;
+                System.arraycopy(ordersOfTable,i+1,ordersOfTable,i,ordersOfTable.length-i);
+            }
+        }
+        if(count>0)
+            return count;
+        else
+            return -1;
+
+    }
+
+    public int remove(TableOrder order)
+    {
+        int count=0;
+        for (int i = 0; i <ordersOfTable.length ; i++) {
+
+            if (ordersOfTable[i].equals(order))
+            {
+                ordersOfTable[i]=null;
+                count++;
+                System.arraycopy(ordersOfTable,i+1,ordersOfTable,i,ordersOfTable.length-i);
+                return i;
+            }
+        }
+       return -1;
+    }
+
+    public void remove(int index)
+    {
+        System.arraycopy(ordersOfTable,index+1,ordersOfTable,index,ordersOfTable.length-index);
+        ordersOfTable[ordersOfTable.length]=null;
+    }
+
 }
