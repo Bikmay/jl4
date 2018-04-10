@@ -7,6 +7,6 @@ public interface Queue {
     Order getValueOrder(int index);
     boolean add(Order order);
     boolean remove(int index);
-    Order[] getArrayOrder();
+    Order[] getArrayOrders();
 
 }

@@ -45,10 +45,43 @@ public class InternetOrdersManager {
 
     public Order[] getArrayQueue()
     {
-        queue.getArrayOrder();
+        return queue.getArrayOrder();
+
     }
 
+    public int getOrderCost()
+    {
+        Order[] orders = queue.getArrayOrders();
+        int cost=0;
 
+        for (int i = 0; i < queue.getSize(); i++) {
+
+            cost+=queue.getValueOrder(i).costTotal();
+
+        }
+        return cost;
+    }
+
+    public int getQualityOrder(String name)
+    {
+        int count=0;
+        for (int i = 0; i < queue.getSize(); i++) {
+            count+=queue.getValueOrder(i).getItemQuantity(name);
+
+
+        }
+        return count;
+
+    }
+
+    public int getQualityOrder(MenuItem item)
+    {
+        int count=0;
+        for (int i = 0; i <queue.getSize() ; i++) {
+            count+=queue.getValueOrder(i).getItemQuantity(item);
+        }
+        return count;
+    }
 
 
 }

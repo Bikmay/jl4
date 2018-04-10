@@ -144,7 +144,7 @@ public class ListNode implements  Queue{
         return arr;
     }
 
-    public Order[] getArrayOrder()
+    public Order[] getArrayOrders()
     {
         Order[] arr = new Order[size-1];
         for (int i = 0; i <size ; i++) {
