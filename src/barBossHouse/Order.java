@@ -19,7 +19,7 @@ public interface Order {
     MenuItem[] sortedItemsByCostDesc();
 
     double costTotal();
-
+//gbl
     Customer getCustomer();
     void setCustomer(Customer customer);
 
