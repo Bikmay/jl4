@@ -1,5 +1,7 @@
 package barBossHouse;
 
+import javax.swing.plaf.PanelUI;
+
 public class ListNode implements  Queue{
 
     private int index;
@@ -133,6 +135,23 @@ public class ListNode implements  Queue{
 
     }
 
+    public MenuItem[] getArrayMenuItem()
+    {
+        MenuItem[] arr = new MenuItem[size-1];
+        for (int i = 0; i <size ; i++) {
+            arr[i]=this.get(i);
+        }
+        return arr;
+    }
+
+    public Order[] getArrayOrder()
+    {
+        Order[] arr = new Order[size-1];
+        for (int i = 0; i <size ; i++) {
+            arr[i]=this.getValueOrder(i);
+        }
+        return arr;
+    }
     public MenuItem get(int index)
     {
         ListNode item=head;
@@ -170,5 +189,9 @@ public class ListNode implements  Queue{
                 return false;
         }
         return true;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
