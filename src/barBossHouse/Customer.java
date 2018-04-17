@@ -11,13 +11,20 @@ public final class Customer {
     private final Customer MATURE_UNKNOWN_CUSTOMER = new Customer(21);
     private final Customer NOT_MATURE_UNKNOWN_CUSTOMER = new Customer(14);
 
+    public static final String DEFAULT_NAME="";
+    public static final String DEFALT_SECONDNAME="";
+    public static final int DEFAULT_AGE=-1;
+    public static final Address DEFAULT_ADDRESS=null;
+
+
     //todo: опять же, дефолт в константы
+    //todo: do
     public Customer() {
-        new Customer("", "", -1, null);
+        new Customer(DEFAULT_NAME,DEFALT_SECONDNAME,  DEFAULT_AGE, DEFAULT_ADDRESS);
     }
 
     public Customer(int age) {
-        new Customer("", "", age, null);
+        new Customer("", "", age, DEFAULT_ADDRESS);
     }
 
     public Customer(String name, String secondName, int age, Address address) {

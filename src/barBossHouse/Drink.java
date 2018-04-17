@@ -1,6 +1,6 @@
 package barBossHouse;
 
-public class Drink extends MenuItem {
+public class Drink extends MenuItem implements Alcoholable {
 
     private double alcoholVol;
     private DrinkTypeEnum type;
@@ -15,7 +15,7 @@ public class Drink extends MenuItem {
 
     }
 
-    //todo: дефолт
+
     public Drink(double cost, String name, DrinkTypeEnum type, String description) {
         super(name, description, cost);
         this.type = type;
@@ -52,5 +52,15 @@ public class Drink extends MenuItem {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isAlcoholicDrink() {
+        return false;
+    }
+
+    @Override
+    public double getAlcoholVol() {
+        return 0;
     }
 }

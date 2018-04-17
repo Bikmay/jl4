@@ -1,9 +1,14 @@
 package barBossHouse;
 
+import javax.xml.bind.annotation.XmlType;
+
 public class Dish extends MenuItem {
     //todo: дефолт
+    //todo:do
+
+    private static final int DEFAULT_VALUE =0;
     protected Dish(String name, String description) {
-        super(name, description, 0);
+        super(name, description, DEFAULT_VALUE);
     }
 
     protected Dish(String name, String description, int cost) {
@@ -20,7 +25,7 @@ public class Dish extends MenuItem {
         return super.hashCode();
     }
 
-    //todo переделать
+
     @Override
     public boolean equals(Object obj) {
         MenuItem menuItem = this;

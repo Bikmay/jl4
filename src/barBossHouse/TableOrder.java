@@ -2,8 +2,7 @@ package barBossHouse;
 
 public class TableOrder implements Order {
 
-    //todo пересмотри свою политику именования в этом и других классах.
-    //todo MenuItem можешь не трогать, там нормально)
+
     private int size;
     private MenuItem[] menuItems;
     private Customer customer;

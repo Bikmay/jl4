@@ -10,11 +10,12 @@ public class ListNode<E> implements Queue {
     private E value;
 
     //todo:  поля не инициализируются при объявлении
-    public int size = 0;
+    public int size;
 
     public ListNode() {
         head = new ListNode();
         index = 0;
+        size=0;
     }
 
     public void add(Object item) {

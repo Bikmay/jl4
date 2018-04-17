@@ -18,7 +18,7 @@ public class InternetOrder implements Order {
 
     }
 
-    //todo: fix it
+
     public boolean addDish(MenuItem menuItem) {
 
         list.add(menuItem);
@@ -30,7 +30,7 @@ public class InternetOrder implements Order {
     public boolean remove(String deleteDish) {
         for (int i = 0; i < list.size; i++) {
 
-            if (deleteDish.equals(((Order)list.get(i)).getName())) {
+            if (deleteDish.equals(((Order)list.get(i)))) {
                 size--;
                 return list.remove(i);
 
@@ -60,7 +60,7 @@ public class InternetOrder implements Order {
         int count = 0;
         for (int i = 0; i < list.size; i++) {
 
-            if (deleteDish.equals(list.get(i).getName())) {
+            if (deleteDish.equals((((MenuItem)list.get(i)).getName()))) {
                 list.remove(i);
                 count++;
 
@@ -92,7 +92,7 @@ public class InternetOrder implements Order {
         list = ListNode.sort(list, 0, -1);
 
         for (int i = 0; i < list.size; i++) {
-            arr[i] = list.get(i);
+            arr[i] = (MenuItem)list.get(i);
         }
         return arr;
     }
@@ -104,7 +104,7 @@ public class InternetOrder implements Order {
     public double costTotal() {
         int cost = 0;
         for (int i = 0; i < list.size; i++) {
-            cost += list.get(i).getCost();
+            cost += ((MenuItem)list.get(i)).getCost();
 
         }
         return cost;
@@ -113,7 +113,7 @@ public class InternetOrder implements Order {
     public MenuItem[] getItems() {
         MenuItem[] arr = new MenuItem[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = list.get(i);
+            arr[i] = (MenuItem)list.get(i);
         }
         return arr;
     }
@@ -122,7 +122,7 @@ public class InternetOrder implements Order {
         int count = 0;
         for (int i = 0; i < list.size; i++) {
 
-            if (findDish.equals(list.get(i).getName())) {
+            if (findDish.equals(((MenuItem)list.get(i)).getName())) {
 
                 count++;
 
@@ -151,7 +151,7 @@ public class InternetOrder implements Order {
         String[] resArr = new String[list.size];
 
         for (int i = 0; i < list.size; i++) {
-            resArr[i] = list.get(i).getName();
+            resArr[i] = ((MenuItem)list.get(i)).getName();
         }
         return resArr;
     }
@@ -160,6 +160,8 @@ public class InternetOrder implements Order {
     public Customer getCustomer() {
         return customer;
     }
+
+
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -191,7 +193,7 @@ public class InternetOrder implements Order {
 
     @Override
     public int hashCode() {
-        return size ^ customer.hashCode() ^ list.hashCode() ^ tail.hashCode();
+        return size ^ customer.hashCode() ^ list.hashCode() ^ list.hashCode();
     }
 
 }
