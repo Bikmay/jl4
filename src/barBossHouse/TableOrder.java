@@ -1,6 +1,6 @@
 package barBossHouse;
 
-public class TableOrder  implements Order{
+public class TableOrder implements Order {
 
     //todo пересмотри свою политику именования в этом и других классах.
     //todo MenuItem можешь не трогать, там нормально)
@@ -8,21 +8,21 @@ public class TableOrder  implements Order{
     private MenuItem[] menuItems;
     private Customer customer;
 
-    private final int DEFAULT_COUNT_DISHES=16;
+    private final int DEFAULT_COUNT_DISHES = 16;
 
 
     public TableOrder(Customer customer) {
-        new TableOrder(DEFAULT_COUNT_DISHES,customer);
+        new TableOrder(DEFAULT_COUNT_DISHES, customer);
     }
 
     public TableOrder(int numberOfElements, Customer customer) {
         menuItems = new MenuItem[numberOfElements];
-        size=numberOfElements;
-        this.customer=customer;
+        size = numberOfElements;
+        this.customer = customer;
     }
 
     public TableOrder(MenuItem[] menuItems, Customer customer) {
-        this.customer=customer;
+        this.customer = customer;
     }
 
     private static MenuItem[] quickSort(MenuItem[] mass, int b, int e) {
@@ -62,11 +62,10 @@ public class TableOrder  implements Order{
         }
 
         for (int i = 0; i < indexMass.length; i++) {
-            System.arraycopy(menuItems,indexMass[i], menuItems,indexMass[i]-i,count+size-indexMass[i]-1);
+            System.arraycopy(menuItems, indexMass[i], menuItems, indexMass[i] - i, count + size - indexMass[i] - 1);
         }
         return count;
     }
-
 
 
     //do
@@ -75,7 +74,7 @@ public class TableOrder  implements Order{
             if (deleteDish.equals(menuItems[i].getName())) {
                 menuItems[i] = null;
                 System.arraycopy(menuItems, i, menuItems, i + 1, size);
-                menuItems[size]=null;
+                menuItems[size] = null;
                 size--;
                 return true;
             }
@@ -83,12 +82,10 @@ public class TableOrder  implements Order{
         return false;
     }
 
-    public boolean remove(MenuItem menuItem)
-    {
-        for (int i = 0; i <size ; i++) {
-            if(menuItems[i].equals(menuItem))
-            {
-                System.arraycopy(menuItems,i,menuItems,i+1,size-i);
+    public boolean remove(MenuItem menuItem) {
+        for (int i = 0; i < size; i++) {
+            if (menuItems[i].equals(menuItem)) {
+                System.arraycopy(menuItems, i, menuItems, i + 1, size - i);
                 return true;
             }
 
@@ -96,14 +93,12 @@ public class TableOrder  implements Order{
         return false;
     }
 
-    public int removeAll(String itemName)
-    {
-        int count=0;
+    public int removeAll(String itemName) {
+        int count = 0;
 
-        for (int i = 0; i <size ; i++) {
-            if(menuItems[i].getName().equals(itemName))
-            {
-                System.arraycopy(menuItems,i,menuItems,i+1,size-i);
+        for (int i = 0; i < size; i++) {
+            if (menuItems[i].getName().equals(itemName)) {
+                System.arraycopy(menuItems, i, menuItems, i + 1, size - i);
                 count++;
             }
 
@@ -111,14 +106,13 @@ public class TableOrder  implements Order{
         return count;
 
     }
-    public int removeAll(MenuItem menuItem)
-    {
-         int count=0;
 
-        for (int i = 0; i <size ; i++) {
-            if(menuItems[i].equals(menuItem))
-            {
-                System.arraycopy(menuItems,i,menuItems,i+1,size-i);
+    public int removeAll(MenuItem menuItem) {
+        int count = 0;
+
+        for (int i = 0; i < size; i++) {
+            if (menuItems[i].equals(menuItem)) {
+                System.arraycopy(menuItems, i, menuItems, i + 1, size - i);
                 count++;
             }
 
@@ -130,7 +124,6 @@ public class TableOrder  implements Order{
 
     //do
     public MenuItem[] sortedItemsByCostDesc() {
-
 
 
         menuItems = quickSort(menuItems, 0, size - 1);
@@ -145,7 +138,6 @@ public class TableOrder  implements Order{
     }
 
 
-
     //do
     public boolean addDish(MenuItem menuItem) {
 
@@ -155,8 +147,8 @@ public class TableOrder  implements Order{
             return true;
         } else {
 
-            MenuItem[] newMass = new MenuItem[(size-1) * 2];
-            System.arraycopy(menuItems, 0, newMass, 0, size-1);
+            MenuItem[] newMass = new MenuItem[(size - 1) * 2];
+            System.arraycopy(menuItems, 0, newMass, 0, size - 1);
             newMass[size] = menuItem;
             menuItems = newMass;
             size++;
@@ -174,9 +166,8 @@ public class TableOrder  implements Order{
     }
 
 
-
     //do
-    public int  getItemQuantity(String nameOfDish) {
+    public int getItemQuantity(String nameOfDish) {
         int count = 0;
         for (int i = 0; i < menuItems.length; i++) {
             if (nameOfDish.equals(menuItems[i].getName())) {
@@ -186,8 +177,7 @@ public class TableOrder  implements Order{
         return count;
     }
 
-    public int  getItemQuantity(MenuItem item)
-    {
+    public int getItemQuantity(MenuItem item) {
         int count = 0;
         for (int i = 0; i < menuItems.length; i++) {
             if (item.equals(menuItems[i])) {
@@ -220,8 +210,6 @@ public class TableOrder  implements Order{
     }
 
 
-
-
     //один забыл, но сделал
     public int getQuantity() {
         return size;
@@ -237,29 +225,27 @@ public class TableOrder  implements Order{
 
     @Override
     public String toString() {
-        String returnString="";
+        String returnString = "";
 
-        returnString+= "TakeOder:"+size+"\n";
+        returnString += "TakeOder:" + size + "\n";
 
-        for (int i = 0; i <size ; i++) {
-            returnString+=menuItems[i].toString()+"\n";
+        for (int i = 0; i < size; i++) {
+            returnString += menuItems[i].toString() + "\n";
         }
         return returnString;
     }
 
     @Override
     public boolean equals(Object obj) {
-        TableOrder tableOrder =(TableOrder) obj;
-       if(obj.getClass()==this.getClass() && this.customer.equals(tableOrder))
-       {
-           for (int i = 0; i <size ; i++) {
-               if(!(this.menuItems[i].equals(tableOrder.menuItems[i])))
-               {
-                   return false;
-               }
-           }
-           return true;
-       }
-       return false;
+        TableOrder tableOrder = (TableOrder) obj;
+        if (obj.getClass() == this.getClass() && this.customer.equals(tableOrder)) {
+            for (int i = 0; i < size; i++) {
+                if (!(this.menuItems[i].equals(tableOrder.menuItems[i]))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

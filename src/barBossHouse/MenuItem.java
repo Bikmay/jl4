@@ -24,11 +24,9 @@ public abstract class MenuItem {
     }
 
 
-
     public String getName() {
         return name;
     }
-
 
 
     public String getDescription() {
@@ -38,14 +36,14 @@ public abstract class MenuItem {
 
     @Override
     public String toString() {
-        return name + ","+cost+"р.";
+        return name + "," + cost + "р.";
     }
 
     @Override
     public boolean equals(Object obj) {
         MenuItem menuItem = (MenuItem) obj;
 
-        if(menuItem.name == this.name & this.cost==menuItem.cost)
+        if (menuItem.name == this.name & this.cost == menuItem.cost)
             return true;
         else
             return false;
@@ -53,6 +51,6 @@ public abstract class MenuItem {
 
     @Override
     public int hashCode() {
-            return name.hashCode()^description.hashCode()^(int)cost;
+        return name.hashCode() ^ description.hashCode() ^ (int) cost;
     }
 }

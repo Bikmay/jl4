@@ -1,5 +1,7 @@
 package barBossHouse;
 
+import java.util.LinkedList;
+
 public class Tests {
 
     //todo чот так себе тесты)
@@ -8,6 +10,8 @@ public class Tests {
         TableOrder order = new TableOrder();
 
         System.out.println(testCheckClassOrder1(order));
+
+        LinkedList list;
 
     }
 

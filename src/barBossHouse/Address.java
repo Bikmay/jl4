@@ -19,6 +19,7 @@ public class Address {
         this.apartmentNumber = apartmentNumber;
     }
 
+    //todo: Когда научишься дефолтные значения в константы помещать?)
     public Address() {
         new Address("", "", -1, -1, ' ', -1);
     }
@@ -52,6 +53,7 @@ public class Address {
         return apartmentNumber;
     }
 
+    //todo: заюзай StringBuilder
     @Override
     public String toString() {
         return cityName + " " + zipCode + "," + streetName + " " + buildingName + " " + buildingLetter + "-" + apartmentNumber;
