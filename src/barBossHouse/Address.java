@@ -57,7 +57,20 @@ public class Address {
     //todo:do
     @Override
     public String toString() {
-        return cityName + " " + zipCode + "," + streetName + " " + buildingName + " " + buildingLetter + "-" + apartmentNumber;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if(!cityName.equals(" "))
+            stringBuilder.append(cityName).append(" ");
+
+        stringBuilder.append(zipCode).append(" ");
+
+        if(!streetName.equals(" "))
+            stringBuilder.append(streetName).append(" ");
+        if(buildingLetter != ' ')
+            stringBuilder.append(buildingLetter).append(" ");
+        stringBuilder.append(apartmentNumber);
+
+        return stringBuilder.toString();
     }
 
     @Override
