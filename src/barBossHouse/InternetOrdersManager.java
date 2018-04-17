@@ -23,7 +23,7 @@ public class InternetOrdersManager {
     }
 
     public Order getFirstOrder() {
-        return queue.getValueOrder(0);
+        return (Order)queue.get(0);
     }
 
     public Order getFirstOrderAndDelete() {
@@ -38,17 +38,23 @@ public class InternetOrdersManager {
     }
 
     public Order[] getArrayQueue() {
-        return queue.getArrayOrder();
+        Object[] mass = queue.getArray();
+        Order[] arr=new Order[queue.getSize()];
+
+        for (int i = 0; i <mass.length ; i++) {
+            arr[i]=(Order)mass[i];
+        }
+        return arr;
 
     }
 
     public int getOrderCost() {
-        Order[] orders = queue.getArrayOrders();
+        Order[] orders = this.getArrayQueue();
         int cost = 0;
 
         for (int i = 0; i < queue.getSize(); i++) {
 
-            cost += queue.getValueOrder(i).costTotal();
+            cost += ((Order)queue.get(i)).costTotal();
 
         }
         return cost;
@@ -57,7 +63,7 @@ public class InternetOrdersManager {
     public int getQualityOrder(String name) {
         int count = 0;
         for (int i = 0; i < queue.getSize(); i++) {
-            count += queue.getValueOrder(i).getItemQuantity(name);
+            count += ((Order)queue.get(i)).getItemQuantity(name);
 
 
         }
@@ -68,7 +74,7 @@ public class InternetOrdersManager {
     public int getQualityOrder(MenuItem item) {
         int count = 0;
         for (int i = 0; i < queue.getSize(); i++) {
-            count += queue.getValueOrder(i).getItemQuantity(item);
+            count += ((Order)queue.get(i)).getItemQuantity(item);
         }
         return count;
     }

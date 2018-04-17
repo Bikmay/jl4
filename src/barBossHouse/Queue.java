@@ -5,12 +5,11 @@ public interface Queue {
 
     int getSize();
 
-    Order getValueOrder(int index);
-
-    boolean add(Order order);
+    Object get(int index);
+    void add(Object order);
 
     boolean remove(int index);
 
-    Order[] getArrayOrders();
+    Object[] getArray();
 
 }

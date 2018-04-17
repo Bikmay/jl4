@@ -1,14 +1,14 @@
 package barBossHouse;
 
 //todo: Generics or Object
-public class ListNode implements Queue {
+public class ListNode<E> implements Queue {
 
     private int index;
     private ListNode head;
     private ListNode next;
     //todo:  fix
-    private MenuItem value;
-    private Order valueOrder;
+    private E value;
+
     //todo:  поля не инициализируются при объявлении
     public int size = 0;
 
@@ -17,21 +17,21 @@ public class ListNode implements Queue {
         index = 0;
     }
 
-    public ListNode add(MenuItem item) {
+    public void add(Object item) {
         next = new ListNode();
         next.value = item;
         next.index = this.index++;
         size++;
-        return next;
+
     }
 
     public static ListNode sort(ListNode list, int b, int e) {
-        MenuItem piv = list.get((b / e) / 2);
+        MenuItem piv = (MenuItem)list.get((b / e) / 2);
         int l = b, r = e;
 
         do {
-            while (list.get(l).getCost() < piv.getCost()) l++;
-            while (list.get(r).getCost() > piv.getCost()) r--;
+            while (((MenuItem)list.get(l)).getCost() < piv.getCost()) l++;
+            while (((MenuItem)list.get(l)).getCost() > piv.getCost()) r--;
             if (l <= r) list = swap(list, l, r);
         } while (l <= r);
         if (b < r) sort(list, b, r);
@@ -72,13 +72,7 @@ public class ListNode implements Queue {
     }
 
 
-    public boolean add(Order order) {
-        next = new ListNode();
-        next.valueOrder = order;
 
-        size++;
-        return true;
-    }
 
 
 
@@ -120,24 +114,18 @@ public class ListNode implements Queue {
         }
 
     }
-    //todo: мы не указываем в имени тип возвращаемой структуры
-    public MenuItem[] getArrayMenuItem() {
-        MenuItem[] arr = new MenuItem[size - 1];
+
+
+
+    public Object[] getArray() {
+        Object[] arr = new Order[size - 1];
         for (int i = 0; i < size; i++) {
             arr[i] = this.get(i);
         }
         return arr;
     }
 
-    public Order[] getArrayOrders() {
-        Order[] arr = new Order[size - 1];
-        for (int i = 0; i < size; i++) {
-            arr[i] = this.getValueOrder(i);
-        }
-        return arr;
-    }
-
-    public MenuItem get(int index) {
+    public Object get(int index) {
         ListNode item = head;
         for (int i = 0; i < index; i++) {
             item = item.next;
@@ -145,13 +133,7 @@ public class ListNode implements Queue {
         return item.value;
     }
 
-    public Order getValueOrder(int index) {
-        ListNode item = head;
-        for (int i = 0; i < index; i++) {
-            item = item.next;
-        }
-        return item.valueOrder;
-    }
+
 
     @Override
     public String toString() {

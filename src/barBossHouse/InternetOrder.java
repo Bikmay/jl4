@@ -4,14 +4,14 @@ package barBossHouse;
 public class InternetOrder implements Order {
     //todo: fix it
     private int size;
-    private ListNode head;
-    private ListNode tail;
+    private ListNode<MenuItem> list;
+
 
     private Customer customer;
 
 
     public InternetOrder() {
-        head = new ListNode();
+        list = new ListNode();
     }
 
     public InternetOrder(int[] positions, Customer customer) {
@@ -21,18 +21,18 @@ public class InternetOrder implements Order {
     //todo: fix it
     public boolean addDish(MenuItem menuItem) {
 
-        tail = tail.add(menuItem);
+        list.add(menuItem);
         size++;
         return true;
 
     }
 
     public boolean remove(String deleteDish) {
-        for (int i = 0; i < head.size; i++) {
+        for (int i = 0; i < list.size; i++) {
 
-            if (deleteDish.equals(head.get(i).getName())) {
+            if (deleteDish.equals(((Order)list.get(i)).getName())) {
                 size--;
-                return head.remove(i);
+                return list.remove(i);
 
 
             }
@@ -43,11 +43,11 @@ public class InternetOrder implements Order {
     }
 
     public boolean remove(MenuItem item) {
-        for (int i = 0; i < head.size; i++) {
+        for (int i = 0; i < list.size; i++) {
 
-            if (item.equals(head.get(i))) {
+            if (item.equals(list.get(i))) {
                 size--;
-                return head.remove(i);
+                return list.remove(i);
 
             }
         }
@@ -58,10 +58,10 @@ public class InternetOrder implements Order {
 
     public int removeAll(String deleteDish) {
         int count = 0;
-        for (int i = 0; i < head.size; i++) {
+        for (int i = 0; i < list.size; i++) {
 
-            if (deleteDish.equals(head.get(i).getName())) {
-                head.remove(i);
+            if (deleteDish.equals(list.get(i).getName())) {
+                list.remove(i);
                 count++;
 
             }
@@ -73,10 +73,10 @@ public class InternetOrder implements Order {
 
     public int removeAll(MenuItem item) {
         int count = 0;
-        for (int i = 0; i < head.size; i++) {
+        for (int i = 0; i < list.size; i++) {
 
-            if (item.equals(head.get(i))) {
-                head.remove(i);
+            if (item.equals(list.get(i))) {
+                list.remove(i);
                 count++;
             }
         }
@@ -87,12 +87,12 @@ public class InternetOrder implements Order {
 
     @Override
     public MenuItem[] sortedItemsByCostDesc() {
-        MenuItem[] arr = new MenuItem[head.size];
+        MenuItem[] arr = new MenuItem[list.size];
 
-        head = ListNode.sort(head, 0, -1);
+        list = ListNode.sort(list, 0, -1);
 
-        for (int i = 0; i < head.size; i++) {
-            arr[i] = head.get(i);
+        for (int i = 0; i < list.size; i++) {
+            arr[i] = list.get(i);
         }
         return arr;
     }
@@ -103,8 +103,8 @@ public class InternetOrder implements Order {
 
     public double costTotal() {
         int cost = 0;
-        for (int i = 0; i < head.size; i++) {
-            cost += head.get(i).getCost();
+        for (int i = 0; i < list.size; i++) {
+            cost += list.get(i).getCost();
 
         }
         return cost;
@@ -113,16 +113,16 @@ public class InternetOrder implements Order {
     public MenuItem[] getItems() {
         MenuItem[] arr = new MenuItem[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = head.get(i);
+            arr[i] = list.get(i);
         }
         return arr;
     }
 
     public int getItemQuantity(String findDish) {
         int count = 0;
-        for (int i = 0; i < head.size; i++) {
+        for (int i = 0; i < list.size; i++) {
 
-            if (findDish.equals(head.get(i).getName())) {
+            if (findDish.equals(list.get(i).getName())) {
 
                 count++;
 
@@ -135,9 +135,9 @@ public class InternetOrder implements Order {
 
     public int getItemQuantity(MenuItem item) {
         int count = 0;
-        for (int i = 0; i < head.size; i++) {
+        for (int i = 0; i < list.size; i++) {
 
-            if (item.equals(head.get(i))) {
+            if (item.equals(list.get(i))) {
 
                 count++;
             }
@@ -148,10 +148,10 @@ public class InternetOrder implements Order {
     }
 
     public String[] getItemsNames() {
-        String[] resArr = new String[head.size];
+        String[] resArr = new String[list.size];
 
-        for (int i = 0; i < head.size; i++) {
-            resArr[i] = head.get(i).getName();
+        for (int i = 0; i < list.size; i++) {
+            resArr[i] = list.get(i).getName();
         }
         return resArr;
     }
@@ -172,7 +172,7 @@ public class InternetOrder implements Order {
         resString += customer.toString() + "\n";
         resString += size + "\n";
         for (int i = 0; i < size; i++) {
-            resString += head.get(i).toString() + "\n";
+            resString += list.get(i).toString() + "\n";
         }
         return resString;
     }
@@ -182,7 +182,7 @@ public class InternetOrder implements Order {
 
         InternetOrder order = (InternetOrder) obj;
         if (obj.getClass() == this.getClass()) {
-            if (order.customer.equals(this.customer) && this.size == order.size && order.equals(this.head)) {
+            if (order.customer.equals(this.customer) && this.size == order.size && order.equals(this.list)) {
                 return true;
             }
         }
@@ -191,7 +191,7 @@ public class InternetOrder implements Order {
 
     @Override
     public int hashCode() {
-        return size ^ customer.hashCode() ^ head.hashCode() ^ tail.hashCode();
+        return size ^ customer.hashCode() ^ list.hashCode() ^ tail.hashCode();
     }
 
 }
