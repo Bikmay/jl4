@@ -1,40 +1,42 @@
 package barBossHouse;
 
+import java.time.LocalDate;
+
 public final class Customer {
 
     private String name;
     private String secondName;
-    private int age;
+    private LocalDate birthday;
     private Address address;
 
-
-    private final Customer MATURE_UNKNOWN_CUSTOMER = new Customer(21);
-    private final Customer NOT_MATURE_UNKNOWN_CUSTOMER = new Customer(14);
+// FIXME: 20.04.2018 
+    //private final Customer MATURE_UNKNOWN_CUSTOMER = new Customer(21);
+    //private final Customer NOT_MATURE_UNKNOWN_CUSTOMER = new Customer(14);
 
     public static final String DEFAULT_NAME="";
     public static final String DEFALT_SECONDNAME="";
     public static final int DEFAULT_AGE=-1;
     public static final Address DEFAULT_ADDRESS=null;
+    public static final LocalDate DEFAULT_DATE_BIRTHDAY=null;
 
 
-    //todo: опять же, дефолт в константы
-    //todo: do
+    
     public Customer() {
-        new Customer(DEFAULT_NAME,DEFALT_SECONDNAME,  DEFAULT_AGE, DEFAULT_ADDRESS);
+        new Customer(DEFAULT_NAME,DEFALT_SECONDNAME, DEFAULT_ADDRESS,DEFAULT_DATE_BIRTHDAY);
     }
 
-    public Customer(int age) {
-        new Customer("", "", age, DEFAULT_ADDRESS);
+    public Customer(LocalDate date) {
+        new Customer("", "", DEFAULT_ADDRESS,date);
     }
 
-    public Customer(String name, String secondName, int age, Address address) {
+    public Customer(String name, String secondName,  Address address,LocalDate birthday) {
         this.name = name;
         this.secondName = secondName;
-        this.age = age;
+        this.birthday=birthday;
         this.address = address;
     }
 
-
+    // FIXME: 20.04.2018 
     public int getAge() {
         return age;
     }
@@ -51,6 +53,7 @@ public final class Customer {
         return address;
     }
 
+    // FIXME: 20.04.2018 
     @Override
     public String toString() {
         return secondName + " " + name + " " + age + " " + address.toString();
