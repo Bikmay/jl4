@@ -36,9 +36,13 @@ public final class Customer {
         this.address = address;
     }
 
-    // FIXME: 20.04.2018 
+
     public int getAge() {
-        return age;
+
+        LocalDate now = LocalDate.now();
+
+        return now.getYear()-birthday.getYear();
+
     }
 
     public String getName() {
@@ -53,22 +57,28 @@ public final class Customer {
         return address;
     }
 
-    // FIXME: 20.04.2018 
+
     @Override
     public String toString() {
-        return secondName + " " + name + " " + age + " " + address.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(name).append(" ");
+        stringBuilder.append(secondName).append(" ");
+        stringBuilder.append(getAge()).append(" ");
+        stringBuilder.append(address.toString());
+        return stringBuilder.toString();
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode() ^ secondName.hashCode() ^ age ^ address.hashCode();
+        return name.hashCode() ^ secondName.hashCode() ^ getAge() ^ address.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this.getClass() == obj.getClass()) {
             Customer customer = (Customer) obj;
-            if (this.name.equals(customer.name) & this.secondName.equals(customer.secondName) & this.age == customer.age & this.address.equals(customer.address)) {
+            if (this.name.equals(customer.name) & this.secondName.equals(customer.secondName) & this.getAge() == customer.getAge() & this.address.equals(customer.address)) {
                 return true;
             }
 

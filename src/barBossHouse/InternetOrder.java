@@ -1,13 +1,14 @@
 package barBossHouse;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class InternetOrder implements Order {
 
+    private LocalDateTime dateTime;
     private int size;
     private ListNode<MenuItem> list;
-    private LocalDateTime dateTime;
 
 
     private Customer customer;
@@ -199,5 +200,11 @@ public class InternetOrder implements Order {
     public int hashCode() {
         return size ^ customer.hashCode() ^ list.hashCode() ^ list.hashCode();
     }
+
+    @Override
+    public LocalDateTime getLocalDate() {
+        return dateTime;
+    }
+
 
 }

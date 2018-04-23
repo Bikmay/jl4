@@ -252,4 +252,9 @@ public class TableOrder implements Order {
         }
         return false;
     }
+
+    @Override
+    public LocalDateTime getLocalDate() {
+        return dateTime;
+    }
 }

@@ -57,7 +57,9 @@ public class Address {
     //todo:do
     @Override
     public String toString() {
-        return cityName + " " + zipCode + "," + streetName + " " + buildingName + " " + buildingLetter + "-" + apartmentNumber;
+
+        String.format("%d %d , %s")
+        //return cityName + " " + zipCode + "," + streetName + " " + buildingName + " " + buildingLetter + "-" + apartmentNumber;
     }
 
     @Override
