@@ -1,8 +1,12 @@
 package barBossHouse;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class InternetOrder implements Order {
-    //todo: fix it
+
+    private LocalDateTime dateTime;
     private int size;
     private ListNode<MenuItem> list;
 
@@ -12,10 +16,11 @@ public class InternetOrder implements Order {
 
     public InternetOrder() {
         list = new ListNode();
+        this.dateTime= LocalDateTime.now();
     }
 
     public InternetOrder(int[] positions, Customer customer) {
-
+        this.dateTime= LocalDateTime.now();
     }
 
 
@@ -195,5 +200,11 @@ public class InternetOrder implements Order {
     public int hashCode() {
         return size ^ customer.hashCode() ^ list.hashCode() ^ list.hashCode();
     }
+
+    @Override
+    public LocalDateTime getLocalDate() {
+        return dateTime;
+    }
+
 
 }

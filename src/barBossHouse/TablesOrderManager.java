@@ -1,8 +1,9 @@
 package barBossHouse;
 
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
-public class TablesOrderManager {
+public class TablesOrderManager implements OrdersManager {
 
     private TableOrder[] ordersOfTable;
 
@@ -74,35 +75,6 @@ public class TablesOrderManager {
     }
 
 
-    public double getCostAllOrder() {
-        double allCost = 0;
-        for (TableOrder item : ordersOfTable) {
-            allCost += item.costTotal();
-        }
-        return allCost;
-
-    }
-
-
-    public int getCountDish(String nameOfDish) {
-        int count = 0;
-        for (int i = 0; i < ordersOfTable.length; i++) {
-            count += ordersOfTable[i].getItemQuantity(nameOfDish);
-        }
-        return count;
-    }
-
-    public int getCountMenuItem(MenuItem item) {
-        int count = 0;
-        TableOrder[] arr = findBusyTables();
-        for (TableOrder order : arr
-                ) {
-            count += order.getItemQuantity(item);
-
-        }
-        return count;
-    }
-
 
     public Order getOrder(int index) {
         return ordersOfTable[index];
@@ -148,4 +120,74 @@ public class TablesOrderManager {
         ordersOfTable[ordersOfTable.length] = null;
     }
 
+    @Override
+    public int itemsQuantity(String itemName) {
+        int count = 0;
+        for (int i = 0; i < ordersOfTable.length; i++) {
+            count += ordersOfTable[i].getItemQuantity(itemName);
+        }
+        return count;
+    }
+
+    @Override
+    public int itemsQuantity(MenuItem item) {
+        int count = 0;
+        TableOrder[] arr = findBusyTables();
+        for (TableOrder order : arr
+                ) {
+            count += order.getItemQuantity(item);
+
+        }
+        return count;
+    }
+
+    @Override
+    public Order[] getOrders() {
+        return new Order[0];
+    }
+
+    @Override
+    public int ordersCostSummary() {
+        double allCost = 0;
+        for (TableOrder item : ordersOfTable) {
+            allCost += item.costTotal();
+        }
+        return (int)allCost;
+    }
+
+    @Override
+    public int ordersQuantity() {
+        return findBusyTables().length;
+    }
+
+    @Override
+    public int getQuantityOrderOfDay(LocalDate date) {
+        int count=0;
+        for (int i = 0; i <ordersOfTable.length ; i++) {
+            if((ordersOfTable[i]).getLocalDate().equals(date));
+            count++;
+        }
+        return count;
+    }
+
+    @Override
+    public Queue getListOrdersOfDay(LocalDate date) {
+        Queue list = new ListNode<Order>();
+        for (int i = 0; i <ordersOfTable.length ; i++) {
+            if((ordersOfTable[i]).getLocalDate().equals(date));
+            list.add(ordersOfTable[i]);
+        }
+        return list;
+
+    }
+
+    @Override
+    public Queue getCustomerListOrders(Customer customer) {
+        Queue list = new ListNode<Order>();
+        for (int i = 0; i <ordersOfTable.length; i++) {
+            if((ordersOfTable[i]).getCustomer().equals(customer));
+            list.add(ordersOfTable[i]);
+        }
+        return list;
+    }
 }

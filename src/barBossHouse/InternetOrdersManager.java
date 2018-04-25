@@ -1,12 +1,16 @@
 package barBossHouse;
 
-public class InternetOrdersManager {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public class InternetOrdersManager  implements OrdersManager{
 
     private Queue queue;
+    private LocalDateTime dateTime;
 
 
     public InternetOrdersManager() {
-        queue = new ListNode();
+        queue = new ListNode<Order>();
     }
 
     public InternetOrdersManager(Order[] arr) {
@@ -33,11 +37,31 @@ public class InternetOrdersManager {
         return order;
     }
 
-    public int getSizeQueue() {
-        return queue.getSize();
+
+
+
+    @Override
+    public int itemsQuantity(String itemName) {
+        int count = 0;
+        for (int i = 0; i < queue.getSize(); i++) {
+            count += ((Order)queue.get(i)).getItemQuantity(itemName);
+
+
+        }
+        return count;
     }
 
-    public Order[] getArrayQueue() {
+    @Override
+    public int itemsQuantity(MenuItem item) {
+        int count = 0;
+        for (int i = 0; i < queue.getSize(); i++) {
+            count += ((Order)queue.get(i)).getItemQuantity(item);
+        }
+        return count;
+    }
+
+    @Override
+    public Order[] getOrders() {
         Object[] mass = queue.getArray();
         Order[] arr=new Order[queue.getSize()];
 
@@ -45,11 +69,11 @@ public class InternetOrdersManager {
             arr[i]=(Order)mass[i];
         }
         return arr;
-
     }
 
-    public int getOrderCost() {
-        Order[] orders = this.getArrayQueue();
+    @Override
+    public int ordersCostSummary() {
+        Order[] orders = this.getOrders();
         int cost = 0;
 
         for (int i = 0; i < queue.getSize(); i++) {
@@ -60,24 +84,41 @@ public class InternetOrdersManager {
         return cost;
     }
 
-    public int getQualityOrder(String name) {
-        int count = 0;
-        for (int i = 0; i < queue.getSize(); i++) {
-            count += ((Order)queue.get(i)).getItemQuantity(name);
+    @Override
+    public int ordersQuantity() {
+        return queue.getSize();
+    }
 
-
+    @Override
+    public int getQuantityOrderOfDay(LocalDate date) {
+        int count=0;
+        for (int i = 0; i <queue.getSize() ; i++) {
+            if(((Order)queue.get(i)).getLocalDate().equals(dateTime));
+                count++;
         }
         return count;
 
     }
 
-    public int getQualityOrder(MenuItem item) {
-        int count = 0;
-        for (int i = 0; i < queue.getSize(); i++) {
-            count += ((Order)queue.get(i)).getItemQuantity(item);
+    @Override
+    public Queue getListOrdersOfDay(LocalDate date) {
+        Queue list = new ListNode<Order>();
+        for (int i = 0; i <queue.getSize() ; i++) {
+            if(((Order)queue.get(i)).getLocalDate().equals(dateTime));
+                    list.add(queue.get(i));
         }
-        return count;
+        return list;
+
+
     }
 
-
+    @Override
+    public Queue getCustomerListOrders(Customer customer) {
+        Queue list = new ListNode<Order>();
+        for (int i = 0; i <queue.getSize() ; i++) {
+            if(((Order)queue.get(i)).getCustomer().equals(customer));
+                list.add(queue.get(i));
+        }
+        return list;
+    }
 }

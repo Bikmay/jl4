@@ -1,11 +1,15 @@
 package barBossHouse;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 public class TableOrder implements Order {
 
 
     private int size;
     private MenuItem[] menuItems;
     private Customer customer;
+    private LocalDateTime dateTime;
 
     private final int DEFAULT_COUNT_DISHES = 16;
 
@@ -15,13 +19,15 @@ public class TableOrder implements Order {
     }
 
     public TableOrder(int numberOfElements, Customer customer) {
-        menuItems = new MenuItem[numberOfElements];
-        size = numberOfElements;
+        this.menuItems = new MenuItem[numberOfElements];
+        this.size = numberOfElements;
+        this.dateTime= LocalDateTime.now();
         this.customer = customer;
     }
 
     public TableOrder(MenuItem[] menuItems, Customer customer) {
         this.customer = customer;
+        this.dateTime= LocalDateTime.now();
     }
 
     private static MenuItem[] quickSort(MenuItem[] mass, int b, int e) {
@@ -186,8 +192,7 @@ public class TableOrder implements Order {
         return count;
     }
 
-    //todo именование дерьмо
-    //do
+
     public double costTotal() {
         double cost = 0;
         for (int i = 0; i < menuItems.length; i++) {
@@ -199,6 +204,7 @@ public class TableOrder implements Order {
 
     //reform code
     //do
+    //2
     public String[] getItemsNames() {
         String[] names = new String[menuItems.length];
 
@@ -246,5 +252,10 @@ public class TableOrder implements Order {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public LocalDateTime getLocalDate() {
+        return dateTime;
     }
 }

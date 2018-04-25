@@ -1,5 +1,9 @@
 package barBossHouse;
 
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public interface Order {
 
     boolean addDish(MenuItem item);
@@ -36,6 +40,12 @@ public interface Order {
     boolean equals(Object obj);
 
     int hashCode();
+
+    LocalDateTime getLocalDate();
+
+
+
+
 
 
 }
