@@ -1,5 +1,6 @@
 package barBossHouse;
 
+import java.nio.channels.AlreadyBoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -21,7 +22,17 @@ public class InternetOrdersManager  implements OrdersManager{
         }
     }
 
-    public boolean add(Order order) {
+    public boolean add(Order order) throws AlreadyAddedException {
+
+        LocalDateTime now = LocalDateTime.now();
+        if(now.getHour()>22 | now.getHour()>0 && now.getHour()<8)
+            throw new UnlawfulActionException();
+
+        for (int i = 0; i <queue.getSize() ; i++) {
+            if(((Order)queue.get(i)).getCustomer().equals(order.getCustomer()) & ((Order)queue.get(i)).getLocalDate().equals(order.getLocalDate())))
+                    throw new AlreadyAddedException();
+        }
+
         queue.add(order);
         return true;
     }

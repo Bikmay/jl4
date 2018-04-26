@@ -1,6 +1,7 @@
 package barBossHouse;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 public class TablesOrderManager implements OrdersManager {
@@ -22,6 +23,9 @@ public class TablesOrderManager implements OrdersManager {
 
     public void add(int numberTable, TableOrder addlyOrder) throws AlreadyAddedException {
 
+        LocalDateTime now = LocalDateTime.now();
+        if(now.getHour()>22 | now.getHour()>0 && now.getHour()<8)
+            throw new UnlawfulActionException();
 
         if(ordersOfTable[numberTable]!=null)
             throw new AlreadyAddedException();
