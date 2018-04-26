@@ -29,7 +29,7 @@ public class InternetOrdersManager  implements OrdersManager{
             throw new UnlawfulActionException();
 
         for (int i = 0; i <queue.getSize() ; i++) {
-            if(((Order)queue.get(i)).getCustomer().equals(order.getCustomer()) & ((Order)queue.get(i)).getLocalDate().equals(order.getLocalDate())))
+            if(((Order)queue.get(i)).getCustomer().equals(order.getCustomer()) & ((Order)queue.get(i)).getLocalDate().equals(order.getLocalDate()))
                     throw new AlreadyAddedException();
         }
 
