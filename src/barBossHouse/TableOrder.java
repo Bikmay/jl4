@@ -19,6 +19,9 @@ public class TableOrder implements Order {
     }
 
     public TableOrder(int numberOfElements, Customer customer) {
+        if(numberOfElements<0)
+            throw new NegativeSizeException();
+
         this.menuItems = new MenuItem[numberOfElements];
         this.size = numberOfElements;
         this.dateTime= LocalDateTime.now();
@@ -144,7 +147,13 @@ public class TableOrder implements Order {
 
 
     //do
-    public boolean addDish(MenuItem menuItem) {
+    public boolean addDish(MenuItem menuItem) throws UnlawfulActionException {
+
+        LocalDateTime now = LocalDateTime.now();
+        if (menuItem.getClass()==new Drink().getClass())
+            if(now.getHour()>22 && now.getHour()<8 && now.getHour()>0)
+                throw new UnlawfulActionException();
+
 
         if (menuItems.length <= size) {
             menuItems[size] = menuItem;

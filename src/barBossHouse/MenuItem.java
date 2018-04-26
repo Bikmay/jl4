@@ -9,6 +9,7 @@ public abstract class MenuItem {
     private double cost;
 
 
+
     protected MenuItem(String name, String description) {
         this(name, description, DEFAULT_COST);
     }

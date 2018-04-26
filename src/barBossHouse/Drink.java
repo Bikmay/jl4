@@ -33,6 +33,9 @@ public class Drink extends MenuItem implements Alcoholable {
         this.type = type;
         this.alcoholVol = 0;
     }
+    public Drink(){
+        super("","",0);
+    }
 
 
     public DrinkTypeEnum getType() {

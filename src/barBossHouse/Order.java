@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public interface Order {
 
-    boolean addDish(MenuItem item);
+    boolean addDish(MenuItem item) throws UnlawfulActionException;
 
     String[] getItemsNames();
 

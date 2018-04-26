@@ -24,7 +24,12 @@ public class InternetOrder implements Order {
     }
 
 
-    public boolean addDish(MenuItem menuItem) {
+    public boolean addDish(MenuItem menuItem) throws UnlawfulActionException {
+
+        LocalDateTime now = LocalDateTime.now();
+        if (menuItem.getClass()==new Drink().getClass())
+            if(now.getHour()>22 && now.getHour()<8 && now.getHour()>0)
+                throw new UnlawfulActionException();
 
         list.add(menuItem);
         size++;

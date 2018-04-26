@@ -9,22 +9,31 @@ public class TablesOrderManager implements OrdersManager {
 
 
     //Чекни задание
-    public TablesOrderManager(int InputNumberOfTable) {
-        TableOrder[] OrdersOfTable = new TableOrder[InputNumberOfTable];
+    public TablesOrderManager(int inputNumberOfTable) {
 
-        int numberOfTable = InputNumberOfTable;
+        if(inputNumberOfTable<0)
+            throw new NegativeSizeException();
+
+        TableOrder[] OrdersOfTable = new TableOrder[inputNumberOfTable];
+
+        int numberOfTable = inputNumberOfTable;
     }
 
 
-    public void add(int numberTable, TableOrder addlyOrder) {
+    public void add(int numberTable, TableOrder addlyOrder) throws AlreadyAddedException {
+
+
+        if(ordersOfTable[numberTable]!=null)
+            throw new AlreadyAddedException();
+
         if (ordersOfTable.length <= numberTable) {
             ordersOfTable[numberTable] = addlyOrder;
 
         } else {
-//            TableOrder[] newMass = new TableOrder[ordersOfTable.length * 2];
-//            System.arraycopy(ordersOfTable, 0, newMass, 0, ordersOfTable.length);
-//            newMass[ordersOfTable.length] = addlyOrder;
-//            ordersOfTable = newMass;
+           TableOrder[] newMass = new TableOrder[ordersOfTable.length * 2];
+           System.arraycopy(ordersOfTable, 0, newMass, 0, ordersOfTable.length);
+           newMass[ordersOfTable.length] = addlyOrder;
+           ordersOfTable = newMass;
 
         }
     }
@@ -40,11 +49,19 @@ public class TablesOrderManager implements OrdersManager {
 
 
     //do
-    public TableOrder[] findFreeTables() {
+    public TableOrder[] findFreeTables() throws NoFreeTableException {
 
         Predicate<TableOrder> predicate = (e) -> e == null;
-
-        return getTables(predicate);
+        boolean check=false;
+        TableOrder[] arr = getTables(predicate);
+        for (int i = 0; i <arr.length ; i++) {
+            if (arr[i]==null)
+                check^=true;
+        }
+        if (!check)
+            throw new NoFreeTableException();
+        else
+            return arr;
     }
 
     public TableOrder[] findBusyTables() {
