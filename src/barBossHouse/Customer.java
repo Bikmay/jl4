@@ -30,6 +30,16 @@ public final class Customer {
     }
 
     public Customer(String name, String secondName,  Address address,LocalDate birthday) {
+
+        LocalDate now = LocalDate.now();
+
+        if(now.getYear() < birthday.getYear() | (now.getYear() == birthday.getYear() & now.getMonthValue() < birthday.getMonthValue()) && ((now.getYear() == birthday.getYear() & now.getMonthValue() == birthday.getMonthValue() & now.getDayOfWeek().getValue()<birthday.getDayOfWeek().getValue() )))
+            throw new IllegalArgumentException();
+
+
+
+
+
         this.name = name;
         this.secondName = secondName;
         this.birthday=birthday;

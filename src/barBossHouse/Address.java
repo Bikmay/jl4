@@ -11,6 +11,10 @@ public class Address {
     private int apartmentNumber;
 
     public Address(String cityName, String streetName, int zipCode, int buildingName, char buildingLetter, int apartmentNumber) {
+
+        if(zipCode<0 | apartmentNumber<0 | buildingName<0 | Character.isLetter(buildingLetter))
+            throw new IllegalArgumentException();
+
         this.cityName = cityName;
         this.streetName = streetName;
         this.zipCode = zipCode;
@@ -58,8 +62,9 @@ public class Address {
     @Override
     public String toString() {
 
-        String.format("%d %d , %s")
+        String str = String.format("%d %d , %s");
         //return cityName + " " + zipCode + "," + streetName + " " + buildingName + " " + buildingLetter + "-" + apartmentNumber;
+        return str;
     }
 
     @Override
