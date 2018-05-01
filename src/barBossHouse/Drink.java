@@ -44,7 +44,9 @@ public class Drink extends MenuItem implements Alcoholable {
 
     @Override
     public String toString() {
-        return type + " " + getName() + "," + getCost() + "р." + " Alcholol:" + alcoholVol + "%" + " " + getDescription();
+
+        return String.format("%s %s, %d р. Alcholol: %d % %s", type.toString(),getName(),getCost(),alcoholVol,getDescription());
+
     }
 
     @Override

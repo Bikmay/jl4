@@ -179,14 +179,16 @@ public class InternetOrder implements Order {
 
     @Override
     public String toString() {
-        String resString = "";
-        resString += "InternetOrder:" + "\n";
-        resString += customer.toString() + "\n";
-        resString += size + "\n";
+
+        StringBuilder stringBuilder =new StringBuilder();
+
+        stringBuilder.append("InternetOdrder:").append("\n").append(customer.toString()).append("\n").append(size).append("\n");
+
+
         for (int i = 0; i < size; i++) {
-            resString += list.get(i).toString() + "\n";
+            stringBuilder.append(list.get(i).toString()).append("\n");
         }
-        return resString;
+        return stringBuilder.toString();
     }
 
     @Override
@@ -194,7 +196,7 @@ public class InternetOrder implements Order {
 
         InternetOrder order = (InternetOrder) obj;
         if (obj.getClass() == this.getClass()) {
-            if (order.customer.equals(this.customer) && this.size == order.size && order.equals(this.list)) {
+            if (order.customer.equals(this.customer) && this.size == order.size && order.equals(this.list) && order.dateTime.equals(this.dateTime)) {
                 return true;
             }
         }

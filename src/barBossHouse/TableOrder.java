@@ -239,20 +239,19 @@ public class TableOrder implements Order {
 
     @Override
     public String toString() {
-        String returnString = "";
 
-        returnString += "TakeOder:" + size + "\n";
+        StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < size; i++) {
-            returnString += menuItems[i].toString() + "\n";
-        }
-        return returnString;
+        stringBuilder.append("Take order:").append(" ").append(size).append("\n");
+
+
+        return stringBuilder.toString();
     }
 
     @Override
     public boolean equals(Object obj) {
         TableOrder tableOrder = (TableOrder) obj;
-        if (obj.getClass() == this.getClass() && this.customer.equals(tableOrder)) {
+        if (obj.getClass() == this.getClass() && this.customer.equals(tableOrder) && this.dateTime.equals(tableOrder.dateTime)) {
             for (int i = 0; i < size; i++) {
                 if (!(this.menuItems[i].equals(tableOrder.menuItems[i]))) {
                     return false;

@@ -57,14 +57,13 @@ public class Address {
         return apartmentNumber;
     }
 
-    //todo: заюзай StringBuilder
+
     //todo:do
     @Override
     public String toString() {
 
-        String str = String.format("%d %d , %s");
-        //return cityName + " " + zipCode + "," + streetName + " " + buildingName + " " + buildingLetter + "-" + apartmentNumber;
-        return str;
+       return String.format("%s %d %s %s %s - %d",cityName,zipCode,streetName,buildingName ,buildingLetter, apartmentNumber);
+
     }
 
     @Override

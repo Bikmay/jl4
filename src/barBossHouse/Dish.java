@@ -17,7 +17,10 @@ public class Dish extends MenuItem {
 
     @Override
     public String toString() {
-        return super.toString() + " " + super.getDescription();
+
+        return String.format("%s %s",super.toString(),super.getDescription());
+
+        //return super.toString() + " " + super.getDescription();
     }
 
     @Override

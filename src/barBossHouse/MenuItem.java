@@ -41,7 +41,9 @@ public abstract class MenuItem {
 
     @Override
     public String toString() {
-        return name + "," + cost + "р.";
+
+        return String.format("%s, %d р.", name,cost);
+
     }
 
     @Override
