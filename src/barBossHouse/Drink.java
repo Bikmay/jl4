@@ -9,10 +9,9 @@ public class Drink extends MenuItem implements Alcoholable {
     public Drink(double cost, String name, DrinkTypeEnum type, String description, double alcoholVol) {
 
 
+        super(name, description, cost);
 
-        super(name,description,cost);
-
-        if(alcoholVol<0 | alcoholVol>100)
+        if (alcoholVol < 0 | alcoholVol > 100)
             throw new IllegalArgumentException();
 
         this.type = type;
@@ -33,8 +32,9 @@ public class Drink extends MenuItem implements Alcoholable {
         this.type = type;
         this.alcoholVol = 0;
     }
-    public Drink(){
-        super("","",0);
+
+    public Drink() {
+        super("", "", 0);
     }
 
 
@@ -44,8 +44,8 @@ public class Drink extends MenuItem implements Alcoholable {
 
     @Override
     public String toString() {
-
-        return String.format("%s %s, %d р. Alcholol: %d % %s", type.toString(),getName(),getCost(),alcoholVol,getDescription());
+//TODO: а здесь среда говорит, что ты чот с форматом накосячил
+        return String.format("%s %s, %d р. Alcholol: %d % %s", type.toString(), getName(), getCost(), alcoholVol, getDescription());
 
     }
 

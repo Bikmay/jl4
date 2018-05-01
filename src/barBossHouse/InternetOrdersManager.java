@@ -1,12 +1,12 @@
 package barBossHouse;
 
-import java.nio.channels.AlreadyBoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-public class InternetOrdersManager  implements OrdersManager{
+//TODO: как так получилось, что этот класс is never used?
+public class InternetOrdersManager implements OrdersManager {
 
     private Queue queue;
+    //TODO: а это поле is never assigned
     private LocalDateTime dateTime;
 
 
@@ -25,12 +25,14 @@ public class InternetOrdersManager  implements OrdersManager{
     public boolean add(Order order) throws AlreadyAddedException {
 
         LocalDateTime now = LocalDateTime.now();
-        if(now.getHour()>22 | now.getHour()>0 && now.getHour()<8)
+        if (now.getHour() > 22 | now.getHour() > 0 && now.getHour() < 8)
             throw new UnlawfulActionException();
 
-        for (int i = 0; i <queue.getSize() ; i++) {
-            if(((Order)queue.get(i)).getCustomer().equals(order.getCustomer()) & ((Order)queue.get(i)).getLocalDate().equals(order.getLocalDate()))
-                    throw new AlreadyAddedException();
+        for (int i = 0; i < queue.getSize(); i++) {
+            if (((Order) queue.get(i)).getCustomer().equals(order.getCustomer()) & ((Order) queue.get(i)).getLocalDate().equals(order.getLocalDate()))
+                //TODO: вот тут ты по идее должен передать сообщение, что уже что-то добавлено, а не просто выбросить исключение
+                //TODO: и так во всех случаях со всеми исключениями :)
+                throw new AlreadyAddedException();
         }
 
         queue.add(order);
@@ -38,7 +40,7 @@ public class InternetOrdersManager  implements OrdersManager{
     }
 
     public Order getFirstOrder() {
-        return (Order)queue.get(0);
+        return (Order) queue.get(0);
     }
 
     public Order getFirstOrderAndDelete() {
@@ -49,13 +51,11 @@ public class InternetOrdersManager  implements OrdersManager{
     }
 
 
-
-
     @Override
     public int itemsQuantity(String itemName) {
         int count = 0;
         for (int i = 0; i < queue.getSize(); i++) {
-            count += ((Order)queue.get(i)).getItemQuantity(itemName);
+            count += ((Order) queue.get(i)).getItemQuantity(itemName);
 
 
         }
@@ -66,7 +66,7 @@ public class InternetOrdersManager  implements OrdersManager{
     public int itemsQuantity(MenuItem item) {
         int count = 0;
         for (int i = 0; i < queue.getSize(); i++) {
-            count += ((Order)queue.get(i)).getItemQuantity(item);
+            count += ((Order) queue.get(i)).getItemQuantity(item);
         }
         return count;
     }
@@ -74,10 +74,10 @@ public class InternetOrdersManager  implements OrdersManager{
     @Override
     public Order[] getOrders() {
         Object[] mass = queue.getArray();
-        Order[] arr=new Order[queue.getSize()];
+        Order[] arr = new Order[queue.getSize()];
 
-        for (int i = 0; i <mass.length ; i++) {
-            arr[i]=(Order)mass[i];
+        for (int i = 0; i < mass.length; i++) {
+            arr[i] = (Order) mass[i];
         }
         return arr;
     }
@@ -89,7 +89,7 @@ public class InternetOrdersManager  implements OrdersManager{
 
         for (int i = 0; i < queue.getSize(); i++) {
 
-            cost += ((Order)queue.get(i)).costTotal();
+            cost += ((Order) queue.get(i)).costTotal();
 
         }
         return cost;
@@ -102,10 +102,10 @@ public class InternetOrdersManager  implements OrdersManager{
 
     @Override
     public int getQuantityOrderOfDay(LocalDate date) {
-        int count=0;
-        for (int i = 0; i <queue.getSize() ; i++) {
-            if(((Order)queue.get(i)).getLocalDate().equals(dateTime));
-                count++;
+        int count = 0;
+        for (int i = 0; i < queue.getSize(); i++) {
+            if (((Order) queue.get(i)).getLocalDate().equals(dateTime)) ;
+            count++;
         }
         return count;
 
@@ -114,9 +114,9 @@ public class InternetOrdersManager  implements OrdersManager{
     @Override
     public Queue getListOrdersOfDay(LocalDate date) {
         Queue list = new ListNode<Order>();
-        for (int i = 0; i <queue.getSize() ; i++) {
-            if(((Order)queue.get(i)).getLocalDate().equals(dateTime));
-                    list.add(queue.get(i));
+        for (int i = 0; i < queue.getSize(); i++) {
+            if (((Order) queue.get(i)).getLocalDate().equals(dateTime)) ;
+            list.add(queue.get(i));
         }
         return list;
 
@@ -126,9 +126,9 @@ public class InternetOrdersManager  implements OrdersManager{
     @Override
     public Queue getCustomerListOrders(Customer customer) {
         Queue list = new ListNode<Order>();
-        for (int i = 0; i <queue.getSize() ; i++) {
-            if(((Order)queue.get(i)).getCustomer().equals(customer));
-                list.add(queue.get(i));
+        for (int i = 0; i < queue.getSize(); i++) {
+            if (((Order) queue.get(i)).getCustomer().equals(customer)) ;
+            list.add(queue.get(i));
         }
         return list;
     }

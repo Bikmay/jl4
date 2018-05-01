@@ -1,7 +1,6 @@
 package barBossHouse;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface Order {
@@ -32,7 +31,6 @@ public interface Order {
     Customer getCustomer();
 
 
-
     void setCustomer(Customer customer);
 
     String toString();
@@ -42,10 +40,6 @@ public interface Order {
     int hashCode();
 
     LocalDateTime getLocalDate();
-
-
-
-
 
 
 }

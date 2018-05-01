@@ -3,7 +3,7 @@ package barBossHouse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
-
+//TODO: этот класс тоже нигде не используется (
 public class TablesOrderManager implements OrdersManager {
 
     private TableOrder[] ordersOfTable;
@@ -12,11 +12,11 @@ public class TablesOrderManager implements OrdersManager {
     //Чекни задание
     public TablesOrderManager(int inputNumberOfTable) {
 
-        if(inputNumberOfTable<0)
+        if (inputNumberOfTable < 0)
             throw new NegativeSizeException();
-
+//TODO: а тут переменная нигде не используется
         TableOrder[] OrdersOfTable = new TableOrder[inputNumberOfTable];
-
+//TODO:  а тут мало того, что не используется, так еще и redundant
         int numberOfTable = inputNumberOfTable;
     }
 
@@ -24,20 +24,20 @@ public class TablesOrderManager implements OrdersManager {
     public void add(int numberTable, TableOrder addlyOrder) throws AlreadyAddedException {
 
         LocalDateTime now = LocalDateTime.now();
-        if(now.getHour()>22 | now.getHour()>0 && now.getHour()<8)
+        if (now.getHour() > 22 | now.getHour() > 0 && now.getHour() < 8)
             throw new UnlawfulActionException();
 
-        if(ordersOfTable[numberTable]!=null)
+        if (ordersOfTable[numberTable] != null)
             throw new AlreadyAddedException();
-
+//TODO: тут всегда будет false
         if (ordersOfTable.length <= numberTable) {
             ordersOfTable[numberTable] = addlyOrder;
 
         } else {
-           TableOrder[] newMass = new TableOrder[ordersOfTable.length * 2];
-           System.arraycopy(ordersOfTable, 0, newMass, 0, ordersOfTable.length);
-           newMass[ordersOfTable.length] = addlyOrder;
-           ordersOfTable = newMass;
+            TableOrder[] newMass = new TableOrder[ordersOfTable.length * 2];
+            System.arraycopy(ordersOfTable, 0, newMass, 0, ordersOfTable.length);
+            newMass[ordersOfTable.length] = addlyOrder;
+            ordersOfTable = newMass;
 
         }
     }
@@ -56,11 +56,11 @@ public class TablesOrderManager implements OrdersManager {
     public TableOrder[] findFreeTables() throws NoFreeTableException {
 
         Predicate<TableOrder> predicate = (e) -> e == null;
-        boolean check=false;
+        boolean check = false;
         TableOrder[] arr = getTables(predicate);
-        for (int i = 0; i <arr.length ; i++) {
-            if (arr[i]==null)
-                check^=true;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null)
+                check ^= true;
         }
         if (!check)
             throw new NoFreeTableException();
@@ -94,7 +94,6 @@ public class TablesOrderManager implements OrdersManager {
 
         return orders;
     }
-
 
 
     public Order getOrder(int index) {
@@ -138,6 +137,7 @@ public class TablesOrderManager implements OrdersManager {
 
     public void remove(int index) {
         System.arraycopy(ordersOfTable, index + 1, ordersOfTable, index, ordersOfTable.length - index);
+        //TODO: среда говорит, что array index is out of bounds
         ordersOfTable[ordersOfTable.length] = null;
     }
 
@@ -173,7 +173,7 @@ public class TablesOrderManager implements OrdersManager {
         for (TableOrder item : ordersOfTable) {
             allCost += item.costTotal();
         }
-        return (int)allCost;
+        return (int) allCost;
     }
 
     @Override
@@ -183,9 +183,12 @@ public class TablesOrderManager implements OrdersManager {
 
     @Override
     public int getQuantityOrderOfDay(LocalDate date) {
-        int count=0;
-        for (int i = 0; i <ordersOfTable.length ; i++) {
-            if((ordersOfTable[i]).getLocalDate().equals(date));
+        int count = 0;
+        for (int i = 0; i < ordersOfTable.length; i++) {
+            //TODO: ага блять, вот даже среда говорит, что выражение if тут c пустым телом.
+            //TODO: сколько раз говорить, чтобы скобки ставили, даже если в if планируется только одна строка?
+            //TODO: ну и к тому же ты тут вызываешь сравнение у inconvertible types
+            if ((ordersOfTable[i]).getLocalDate().equals(date)) ;
             count++;
         }
         return count;
@@ -194,8 +197,9 @@ public class TablesOrderManager implements OrdersManager {
     @Override
     public Queue getListOrdersOfDay(LocalDate date) {
         Queue list = new ListNode<Order>();
-        for (int i = 0; i <ordersOfTable.length ; i++) {
-            if((ordersOfTable[i]).getLocalDate().equals(date));
+        for (int i = 0; i < ordersOfTable.length; i++) {
+            //TODO: и тут все тоже самое, как выше
+            if ((ordersOfTable[i]).getLocalDate().equals(date)) ;
             list.add(ordersOfTable[i]);
         }
         return list;
@@ -205,8 +209,8 @@ public class TablesOrderManager implements OrdersManager {
     @Override
     public Queue getCustomerListOrders(Customer customer) {
         Queue list = new ListNode<Order>();
-        for (int i = 0; i <ordersOfTable.length; i++) {
-            if((ordersOfTable[i]).getCustomer().equals(customer));
+        for (int i = 0; i < ordersOfTable.length; i++) {
+            if ((ordersOfTable[i]).getCustomer().equals(customer)) ;
             list.add(ordersOfTable[i]);
         }
         return list;

@@ -1,7 +1,7 @@
 package barBossHouse;
 
 import java.util.LinkedList;
-
+//TODO: не поставлю лабу, пока не будет нормальных тестов. БУНД БЛЯТЬ!
 public class Tests {
 
     //todo чот так себе тесты)

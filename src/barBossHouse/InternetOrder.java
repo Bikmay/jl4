@@ -1,7 +1,6 @@
 package barBossHouse;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class InternetOrder implements Order {
@@ -16,19 +15,22 @@ public class InternetOrder implements Order {
 
     public InternetOrder() {
         list = new ListNode();
-        this.dateTime= LocalDateTime.now();
+        this.dateTime = LocalDateTime.now();
     }
 
     public InternetOrder(int[] positions, Customer customer) {
-        this.dateTime= LocalDateTime.now();
+        this.dateTime = LocalDateTime.now();
     }
 
 
     public boolean addDish(MenuItem menuItem) throws UnlawfulActionException {
 
         LocalDateTime now = LocalDateTime.now();
-        if (menuItem.getClass()==new Drink().getClass())
-            if(now.getHour()>22 && now.getHour()<8 && now.getHour()>0)
+        //TODO: Instantiating object to get Class object less... (Ctrl+F1)
+        //TODO: Reports any cases where new objects are instantiated for the purpose of accessing its class object. It is more performant to access the class object directly by name
+        if (menuItem.getClass() == new Drink().getClass())
+            //TODO: тут тоже всегда false
+            if (now.getHour() > 22 && now.getHour() < 8 && now.getHour() > 0)
                 throw new UnlawfulActionException();
 
         list.add(menuItem);
@@ -39,8 +41,8 @@ public class InternetOrder implements Order {
 
     public boolean remove(String deleteDish) {
         for (int i = 0; i < list.size; i++) {
-
-            if (deleteDish.equals(((Order)list.get(i)))) {
+//TODO: среда пишет, что каст тут необязателен)
+            if (deleteDish.equals(((Order) list.get(i)))) {
                 size--;
                 return list.remove(i);
 
@@ -70,7 +72,7 @@ public class InternetOrder implements Order {
         int count = 0;
         for (int i = 0; i < list.size; i++) {
 
-            if (deleteDish.equals((((MenuItem)list.get(i)).getName()))) {
+            if (deleteDish.equals((((MenuItem) list.get(i)).getName()))) {
                 list.remove(i);
                 count++;
 
@@ -102,7 +104,7 @@ public class InternetOrder implements Order {
         list = ListNode.sort(list, 0, -1);
 
         for (int i = 0; i < list.size; i++) {
-            arr[i] = (MenuItem)list.get(i);
+            arr[i] = (MenuItem) list.get(i);
         }
         return arr;
     }
@@ -114,7 +116,7 @@ public class InternetOrder implements Order {
     public double costTotal() {
         int cost = 0;
         for (int i = 0; i < list.size; i++) {
-            cost += ((MenuItem)list.get(i)).getCost();
+            cost += ((MenuItem) list.get(i)).getCost();
 
         }
         return cost;
@@ -123,7 +125,7 @@ public class InternetOrder implements Order {
     public MenuItem[] getItems() {
         MenuItem[] arr = new MenuItem[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = (MenuItem)list.get(i);
+            arr[i] = (MenuItem) list.get(i);
         }
         return arr;
     }
@@ -132,7 +134,7 @@ public class InternetOrder implements Order {
         int count = 0;
         for (int i = 0; i < list.size; i++) {
 
-            if (findDish.equals(((MenuItem)list.get(i)).getName())) {
+            if (findDish.equals(((MenuItem) list.get(i)).getName())) {
 
                 count++;
 
@@ -161,7 +163,7 @@ public class InternetOrder implements Order {
         String[] resArr = new String[list.size];
 
         for (int i = 0; i < list.size; i++) {
-            resArr[i] = ((MenuItem)list.get(i)).getName();
+            resArr[i] = ((MenuItem) list.get(i)).getName();
         }
         return resArr;
     }
@@ -172,7 +174,6 @@ public class InternetOrder implements Order {
     }
 
 
-
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -180,7 +181,7 @@ public class InternetOrder implements Order {
     @Override
     public String toString() {
 
-        StringBuilder stringBuilder =new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("InternetOdrder:").append("\n").append(customer.toString()).append("\n").append(size).append("\n");
 

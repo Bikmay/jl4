@@ -1,7 +1,7 @@
 package barBossHouse;
 
 public class Address {
-
+    //TODO: не-не, у тебя же здесь должен создаваться класс с дефолтными параметрами
     public final Address EMPTY_ADDRESS = null;
     private String cityName;
     private String streetName;
@@ -12,7 +12,7 @@ public class Address {
 
     public Address(String cityName, String streetName, int zipCode, int buildingName, char buildingLetter, int apartmentNumber) {
 
-        if(zipCode<0 | apartmentNumber<0 | buildingName<0 | Character.isLetter(buildingLetter))
+        if (zipCode < 0 | apartmentNumber < 0 | buildingName < 0 | Character.isLetter(buildingLetter))
             throw new IllegalArgumentException();
 
         this.cityName = cityName;
@@ -23,7 +23,7 @@ public class Address {
         this.apartmentNumber = apartmentNumber;
     }
 
-
+    //TODO: стой, ты опять дефолтные значения в константы не убираешь? оО
     public Address() {
         new Address("", "", -1, -1, ' ', -1);
     }
@@ -62,7 +62,7 @@ public class Address {
     @Override
     public String toString() {
 
-       return String.format("%s %d %s %s %s - %d",cityName,zipCode,streetName,buildingName ,buildingLetter, apartmentNumber);
+        return String.format("%s %d %s %s %s - %d", cityName, zipCode, streetName, buildingName, buildingLetter, apartmentNumber);
 
     }
 

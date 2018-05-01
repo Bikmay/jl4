@@ -1,4 +1,6 @@
 package barBossHouse;
 
-public class NegativeSizeException extends java.lang.NegativeArraySizeException{
+//TODO: нет смысла писать полное имя класса
+public class NegativeSizeException extends NegativeArraySizeException {
+    //TODO: аналогично с предыдущим исключением
 }

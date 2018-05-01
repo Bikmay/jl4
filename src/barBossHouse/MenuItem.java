@@ -9,14 +9,13 @@ public abstract class MenuItem {
     private double cost;
 
 
-
     protected MenuItem(String name, String description) {
         this(name, description, DEFAULT_COST);
     }
 
     protected MenuItem(String name, String description, double cost) {
 
-        if(cost<0)
+        if (cost < 0)
             throw new IllegalArgumentException();
 
         this.name = name;
@@ -42,7 +41,7 @@ public abstract class MenuItem {
     @Override
     public String toString() {
 
-        return String.format("%s, %d р.", name,cost);
+        return String.format("%s, %d р.", name, cost);
 
     }
 

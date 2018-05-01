@@ -1,17 +1,15 @@
 package barBossHouse;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 public class TableOrder implements Order {
 
 
+    private final int DEFAULT_COUNT_DISHES = 16;
     private int size;
     private MenuItem[] menuItems;
     private Customer customer;
     private LocalDateTime dateTime;
-
-    private final int DEFAULT_COUNT_DISHES = 16;
 
 
     public TableOrder(Customer customer) {
@@ -19,18 +17,18 @@ public class TableOrder implements Order {
     }
 
     public TableOrder(int numberOfElements, Customer customer) {
-        if(numberOfElements<0)
+        if (numberOfElements < 0)
             throw new NegativeSizeException();
 
         this.menuItems = new MenuItem[numberOfElements];
         this.size = numberOfElements;
-        this.dateTime= LocalDateTime.now();
+        this.dateTime = LocalDateTime.now();
         this.customer = customer;
     }
-
+    //TODO: оу, у тебя параметр menuItems нигде не используется
     public TableOrder(MenuItem[] menuItems, Customer customer) {
         this.customer = customer;
-        this.dateTime= LocalDateTime.now();
+        this.dateTime = LocalDateTime.now();
     }
 
     private static MenuItem[] quickSort(MenuItem[] mass, int b, int e) {
@@ -150,8 +148,8 @@ public class TableOrder implements Order {
     public boolean addDish(MenuItem menuItem) throws UnlawfulActionException {
 
         LocalDateTime now = LocalDateTime.now();
-        if (menuItem.getClass()==new Drink().getClass())
-            if(now.getHour()>22 && now.getHour()<8 && now.getHour()>0)
+        if (menuItem.getClass() == new Drink().getClass())
+            if (now.getHour() > 22 && now.getHour() < 8 && now.getHour() > 0)
                 throw new UnlawfulActionException();
 
 

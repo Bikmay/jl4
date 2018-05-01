@@ -1,12 +1,11 @@
 package barBossHouse;
 
-import javax.xml.bind.annotation.XmlType;
-
 public class Dish extends MenuItem {
     //todo: дефолт
     //todo:do
 
-    private static final int DEFAULT_VALUE =0;
+    private static final int DEFAULT_VALUE = 0;
+
     protected Dish(String name, String description) {
         super(name, description, DEFAULT_VALUE);
     }
@@ -18,7 +17,7 @@ public class Dish extends MenuItem {
     @Override
     public String toString() {
 
-        return String.format("%s %s",super.toString(),super.getDescription());
+        return String.format("%s %s", super.toString(), super.getDescription());
 
         //return super.toString() + " " + super.getDescription();
     }

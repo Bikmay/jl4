@@ -3,36 +3,27 @@ package barBossHouse;
 //todo: Generics or Object
 public class ListNode<E> implements Queue {
 
+    //todo:  поля не инициализируются при объявлении
+    public int size;
     private int index;
     private ListNode head;
     private ListNode next;
     //todo:  fix
     private E value;
 
-    //todo:  поля не инициализируются при объявлении
-    public int size;
-
     public ListNode() {
         head = new ListNode();
         index = 0;
-        size=0;
-    }
-
-    public void add(Object item) {
-        next = new ListNode();
-        next.value = item;
-        next.index = this.index++;
-        size++;
-
+        size = 0;
     }
 
     public static ListNode sort(ListNode list, int b, int e) {
-        MenuItem piv = (MenuItem)list.get((b / e) / 2);
+        MenuItem piv = (MenuItem) list.get((b / e) / 2);
         int l = b, r = e;
 
         do {
-            while (((MenuItem)list.get(l)).getCost() < piv.getCost()) l++;
-            while (((MenuItem)list.get(l)).getCost() > piv.getCost()) r--;
+            while (((MenuItem) list.get(l)).getCost() < piv.getCost()) l++;
+            while (((MenuItem) list.get(l)).getCost() > piv.getCost()) r--;
             if (l <= r) list = swap(list, l, r);
         } while (l <= r);
         if (b < r) sort(list, b, r);
@@ -70,6 +61,14 @@ public class ListNode<E> implements Queue {
             workCopy = workCopy.next;
         }
         return workCopy;
+    }
+
+    public void add(Object item) {
+        next = new ListNode();
+        next.value = item;
+        next.index = this.index++;
+        size++;
+
     }
 
 
@@ -117,7 +116,6 @@ public class ListNode<E> implements Queue {
     }
 
 
-
     public Object[] getArray() {
         Object[] arr = new Order[size - 1];
         for (int i = 0; i < size; i++) {
@@ -133,7 +131,6 @@ public class ListNode<E> implements Queue {
         }
         return item.value;
     }
-
 
 
     @Override
