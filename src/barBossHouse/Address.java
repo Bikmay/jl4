@@ -1,14 +1,25 @@
 package barBossHouse;
 
+import sun.security.provider.PolicySpiFile;
+
 public class Address {
-    //TODO: не-не, у тебя же здесь должен создаваться класс с дефолтными параметрами
-    public final Address EMPTY_ADDRESS = null;
+
+    public final Address EMPTY_ADDRESS = new Address();
     private String cityName;
     private String streetName;
     private int zipCode;
     private int buildingName;
     private char buildingLetter;
     private int apartmentNumber;
+
+
+    public static final String DEFAULT_CITYNAME = "";
+    public static final String DEFAULT_STREETNAME = "";
+    public static final int DEFAULT_ZIPCODE = -1;
+    public static final int DEFAULT_BUILDINGNAME=-1;
+    public static final char DEFAULT_BUILDINGLETTER=' ';
+    public static final int DEFAULT_APARTMENTNUMBER=-1;
+
 
     public Address(String cityName, String streetName, int zipCode, int buildingName, char buildingLetter, int apartmentNumber) {
 
@@ -24,12 +35,13 @@ public class Address {
     }
 
     //TODO: стой, ты опять дефолтные значения в константы не убираешь? оО
+    //do
     public Address() {
-        new Address("", "", -1, -1, ' ', -1);
+        new Address(DEFAULT_CITYNAME, DEFAULT_STREETNAME, DEFAULT_ZIPCODE, DEFAULT_BUILDINGNAME, DEFAULT_BUILDINGLETTER, DEFAULT_APARTMENTNUMBER);
     }
 
     public Address(String streetName, int buildingName, char buildingLetter, int apartmentNumber) {
-        new Address("Самара", streetName, -1, buildingName, buildingLetter, apartmentNumber);
+        new Address("Самара", streetName, DEFAULT_ZIPCODE, buildingName, buildingLetter, apartmentNumber);
     }
 
 

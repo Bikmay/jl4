@@ -7,11 +7,13 @@ public class InternetOrdersManager implements OrdersManager {
 
     private Queue queue;
     //TODO: а это поле is never assigned
+    //do
     private LocalDateTime dateTime;
 
 
     public InternetOrdersManager() {
         queue = new ListNode<Order>();
+        dateTime = LocalDateTime.now();
     }
 
     public InternetOrdersManager(Order[] arr) {
@@ -20,19 +22,20 @@ public class InternetOrdersManager implements OrdersManager {
             queue.add(a);
 
         }
+        dateTime = LocalDateTime.now();
     }
 
     public boolean add(Order order) throws AlreadyAddedException {
 
         LocalDateTime now = LocalDateTime.now();
         if (now.getHour() > 22 | now.getHour() > 0 && now.getHour() < 8)
-            throw new UnlawfulActionException();
+            throw new UnlawfulActionException("Time of sale of alcohol left");
 
         for (int i = 0; i < queue.getSize(); i++) {
             if (((Order) queue.get(i)).getCustomer().equals(order.getCustomer()) & ((Order) queue.get(i)).getLocalDate().equals(order.getLocalDate()))
                 //TODO: вот тут ты по идее должен передать сообщение, что уже что-то добавлено, а не просто выбросить исключение
                 //TODO: и так во всех случаях со всеми исключениями :)
-                throw new AlreadyAddedException();
+                throw new AlreadyAddedException("The order has already been added");
         }
 
         queue.add(order);

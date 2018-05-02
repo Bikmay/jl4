@@ -28,10 +28,13 @@ public class InternetOrder implements Order {
         LocalDateTime now = LocalDateTime.now();
         //TODO: Instantiating object to get Class object less... (Ctrl+F1)
         //TODO: Reports any cases where new objects are instantiated for the purpose of accessing its class object. It is more performant to access the class object directly by name
-        if (menuItem.getClass() == new Drink().getClass())
+        //do
+        if (menuItem.getClass().getName().equals(Drink.class.getName()))
             //TODO: тут тоже всегда false
-            if (now.getHour() > 22 && now.getHour() < 8 && now.getHour() > 0)
-                throw new UnlawfulActionException();
+            //do
+            if (now.getHour() > 22 || now.getHour() < 8 ) {
+                throw new UnlawfulActionException("Time of sale of alcohol left");
+            }
 
         list.add(menuItem);
         size++;

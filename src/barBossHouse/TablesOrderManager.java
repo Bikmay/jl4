@@ -25,10 +25,10 @@ public class TablesOrderManager implements OrdersManager {
 
         LocalDateTime now = LocalDateTime.now();
         if (now.getHour() > 22 | now.getHour() > 0 && now.getHour() < 8)
-            throw new UnlawfulActionException();
+            throw new UnlawfulActionException("Time of sale of alcohol left");
 
         if (ordersOfTable[numberTable] != null)
-            throw new AlreadyAddedException();
+            throw new AlreadyAddedException("The order has already been added");
 //TODO: тут всегда будет false
         if (ordersOfTable.length <= numberTable) {
             ordersOfTable[numberTable] = addlyOrder;

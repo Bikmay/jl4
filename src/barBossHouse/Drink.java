@@ -45,7 +45,8 @@ public class Drink extends MenuItem implements Alcoholable {
     @Override
     public String toString() {
 //TODO: а здесь среда говорит, что ты чот с форматом накосячил
-        return String.format("%s %s, %d р. Alcholol: %d % %s", type.toString(), getName(), getCost(), alcoholVol, getDescription());
+        //do
+        return String.format("%s %s, %d р. Alcholol: %d процентов %s", type.toString(), getName(), getCost(), alcoholVol, getDescription());
 
     }
 

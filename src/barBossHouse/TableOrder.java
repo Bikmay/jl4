@@ -18,7 +18,7 @@ public class TableOrder implements Order {
 
     public TableOrder(int numberOfElements, Customer customer) {
         if (numberOfElements < 0)
-            throw new NegativeSizeException();
+            throw new NegativeSizeException("Number of elements is negative");
 
         this.menuItems = new MenuItem[numberOfElements];
         this.size = numberOfElements;
@@ -26,9 +26,11 @@ public class TableOrder implements Order {
         this.customer = customer;
     }
     //TODO: оу, у тебя параметр menuItems нигде не используется
+    //do
     public TableOrder(MenuItem[] menuItems, Customer customer) {
         this.customer = customer;
         this.dateTime = LocalDateTime.now();
+        this.menuItems=menuItems;
     }
 
     private static MenuItem[] quickSort(MenuItem[] mass, int b, int e) {
@@ -134,12 +136,6 @@ public class TableOrder implements Order {
 
         menuItems = quickSort(menuItems, 0, size - 1);
 
-        //todo и здесь... ??
-        //Вписываю в результирующий массив
-
-        //todo тебе достаточно использовать просто метод быстрой сортировки,
-        //todo зачем ты занимаешься созданием бесполезных массиввов?
-        //Сортировка идёт по цене
         return menuItems;
     }
 
@@ -148,9 +144,9 @@ public class TableOrder implements Order {
     public boolean addDish(MenuItem menuItem) throws UnlawfulActionException {
 
         LocalDateTime now = LocalDateTime.now();
-        if (menuItem.getClass() == new Drink().getClass())
+        if (menuItem.getClass().getName().equals(Drink.class.getName()))
             if (now.getHour() > 22 && now.getHour() < 8 && now.getHour() > 0)
-                throw new UnlawfulActionException();
+                throw new UnlawfulActionException("Time of sale of alcohol left");
 
 
         if (menuItems.length <= size) {
